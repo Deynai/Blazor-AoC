@@ -1,0 +1,59 @@
+﻿@page "/Days"
+@inject HttpClient Http
+@inherits LayoutComponentBase
+
+    <style>
+        .asd:hover {
+            background: gray;
+        }
+        .asd tr(odd) {
+            background-color: white;
+        }
+
+        .asd tr(even) {
+            background-color: grey;
+        }
+    </style>
+
+
+<h1> 2020 </h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Day</th>
+            <th>Title</th>
+            <th>Summary</th>
+        </tr>
+    </thead>
+
+    @if (days == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        <tbody>
+            @foreach (dayInfo day in days)
+            {
+                <DaySummaryComponent dayInfo="@day"></DaySummaryComponent>
+            }
+        </tbody>
+    }
+</table>
+
+@code {
+    public dayInfo[] days;
+
+    protected override async Task OnInitializedAsync()
+    {
+        days = await Http.GetFromJsonAsync<dayInfo[]>("sample-data/dayinfo.json");
+    }
+
+    public class dayInfo
+    {
+        public int Day { get; set; }
+        public string Title { get; set; }
+        public string Summary { get; set; }
+    }
+}

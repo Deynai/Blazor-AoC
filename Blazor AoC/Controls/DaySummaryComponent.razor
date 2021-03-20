@@ -1,0 +1,25 @@
+﻿@inject NavigationManager NavigationManager
+
+<tr class="asd" @onclick="SelectDay">
+    <td>Day @dayInfo.Day</td>
+    <td>@dayInfo.Title</td>
+    <td>@dayInfo.Summary</td>
+</tr>
+
+@code {
+    [Parameter]
+    public Days.dayInfo dayInfo { get; set; }
+
+    ElementReference selection;
+
+    private void SelectDay()
+    {
+        NavigationManager.NavigateTo("/days/" + dayInfo.Day.ToString());
+        // open page with the corresponding number
+    }
+
+    private void Highlight()
+    {
+
+    }
+}

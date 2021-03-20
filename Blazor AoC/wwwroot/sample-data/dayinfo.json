@@ -1,0 +1,17 @@
+[
+  {
+    "Day": 1,
+    "Title": "Report Repair",
+    "Summary": "Find two and three numbers in a list that sum to 2020"
+  },
+  {
+    "Day": 2,
+    "Title": "Password Philosophy",
+    "Summary": "Find valid passwords in a list according to rules on characters"
+  },
+  {
+    "Day": 3,
+    "Title": "Toboggan Trajectory",
+    "Summary": "Find number of collisions with trees while traversing a forest along a line"
+  }
+]
