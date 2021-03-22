@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Code\2020\Day1\Day1.cs" />
+    <Content Remove="Code\2020\Day1\day1input.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.2" PrivateAssets="all" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />

@@ -1,16 +1,14 @@
 ﻿@inject NavigationManager NavigationManager
 
 <tr class="asd" @onclick="SelectDay">
-    <td>Day @dayInfo.Day</td>
-    <td>@dayInfo.Title</td>
-    <td>@dayInfo.Summary</td>
+    <td><b>Day @dayInfo.Day</b></td>
+    <td><b>@dayInfo.Title</b></td>
+    <td><b>@dayInfo.Summary</b></td>
 </tr>
 
 @code {
     [Parameter]
     public Days.dayInfo dayInfo { get; set; }
-
-    ElementReference selection;
 
     private void SelectDay()
     {

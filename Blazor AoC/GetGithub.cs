@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-public class TodoItem
+namespace Blazor_AoC
 {
-    public string Title { get; set; }
-    public bool IsDone { get; set; }
-}
+    public class GetGithub
+    {
 
+    }
+}

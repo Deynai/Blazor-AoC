@@ -1,3 +1,17 @@
+/* /Pages/Days.razor.rz.scp.css */
+
+
+[b-8nrbseizwa] .asd:nth-child(odd) {
+    background-color: #efeff5;
+}
+
+[b-8nrbseizwa] .asd:nth-child(even) {
+    background-color: #e0e0eb;
+}
+
+[b-8nrbseizwa] .asd:hover {
+    background-color: #9bbee4;
+}
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-49rz284ufw] {
     position: relative;

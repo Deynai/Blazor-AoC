@@ -1,0 +1,13 @@
+﻿
+
+::deep .asd:nth-child(odd) {
+    background-color: #efeff5;
+}
+
+::deep .asd:nth-child(even) {
+    background-color: #e0e0eb;
+}
+
+::deep .asd:hover {
+    background-color: #9bbee4;
+}

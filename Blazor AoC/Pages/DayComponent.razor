@@ -1,8 +1,39 @@
-﻿@page "/Days/{dayid:int}" 
+﻿@page "/Days/{dayid:int}"
+@inject HttpClient Http
 
 <h1>Day @dayid</h1>
+<hr />
+
+<div class="col-md-12 row">
+    <div >
+        <textarea readonly style="resize:none" rows="20" cols="60">@codeBlock</textarea>
+        <textarea style="resize:none" rows="20" cols="60" @bind="input"></textarea>
+    </div>
+</div>
+
+<div class="col-md-12">
+    <div>
+        <button class="btn btn-primary">Run Part 1</button>
+        <input placeholder="Part 1" />
+    </div>
+    <div style="margin-top:4px">
+        <button class="btn btn-primary">Run Part 2</button>
+        <input placeholder="Part 2" />
+    </div>
+</div>
 
 @code {
     [Parameter]
     public int dayid { get; set; }
+
+    private string input { get; set; }
+
+    private string codeBlock = string.Empty;
+    private string defaultInput = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        codeBlock = (await Http.ge($"Code/2020/Day{dayid}/Day{dayid}.cs")).ToString();
+        input = await Http.GetStringAsync($"Code/2020/Day{dayid}/day{dayid}input.txt");
+    }
 }
