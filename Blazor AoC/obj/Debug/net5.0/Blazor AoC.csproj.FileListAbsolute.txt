@@ -1277,3 +1277,10 @@ C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\obj\Debug\net5.0\Bl
 C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\obj\Debug\net5.0\Blazor AoC.dll
 C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\obj\Debug\net5.0\ref\Blazor AoC.dll
 C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\obj\Debug\net5.0\Blazor AoC.pdb
+C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\bin\Debug\net5.0\wwwroot\_framework\Octokit.dll.gz
+C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\bin\Debug\net5.0\wwwroot\_framework\Octokit.dll
+C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\obj\Debug\net5.0\build-gz\C1DIfA9S.gz
+C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\obj\Debug\net5.0\RazorDeclaration\Pages\Testing.razor.g.cs
+C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\obj\Debug\net5.0\Razor\Pages\Testing.razor.g.cs
+C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\obj\Debug\net5.0\RazorDeclaration\Controls\CounterComponent.razor.g.cs
+C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\obj\Debug\net5.0\Razor\Controls\CounterComponent.razor.g.cs

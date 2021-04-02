@@ -1,13 +1,17 @@
 ﻿
 
 ::deep .asd:nth-child(odd) {
-    background-color: #efeff5;
+    background-color: #585858;
 }
 
 ::deep .asd:nth-child(even) {
-    background-color: #e0e0eb;
+    background-color: #4a4a4a;
 }
 
 ::deep .asd:hover {
-    background-color: #9bbee4;
+    /*background-color: #aa5f03;*/
+    outline-style: solid;
+    outline-color: #fca840;
+    outline-width: 2px;
+    outline-offset: -2px
 }

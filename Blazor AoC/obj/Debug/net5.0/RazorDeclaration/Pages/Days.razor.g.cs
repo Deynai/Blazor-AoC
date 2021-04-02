@@ -96,6 +96,13 @@ using Blazor_AoC.Pages;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 13 "C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\_Imports.razor"
+using Blazor_AoC.Code;
+
+#line default
+#line hidden
+#nullable disable
     [Microsoft.AspNetCore.Components.RouteAttribute("/2020")]
     public partial class Days : Microsoft.AspNetCore.Components.ComponentBase
     {
@@ -105,21 +112,15 @@ using Blazor_AoC.Pages;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 30 "C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\Pages\Days.razor"
-       
-    public dayInfo[] days;
+#line 38 "C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\Pages\Days.razor"
+           
+        public dayInfo[] days;
 
-    protected override async Task OnInitializedAsync()
-    {
-        days = await Http.GetFromJsonAsync<dayInfo[]>("sample-data/dayinfo.json");
-    }
-
-    public class dayInfo
-    {
-        public int Day { get; set; }
-        public string Title { get; set; }
-        public string Summary { get; set; }
-    }
+        protected override async Task OnInitializedAsync()
+        {
+            days = await Http.GetFromJsonAsync<dayInfo[]>("sample-data/dayinfo.json");
+        }
+    
 
 #line default
 #line hidden

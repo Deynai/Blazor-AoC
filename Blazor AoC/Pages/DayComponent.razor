@@ -1,39 +1,132 @@
-﻿@page "/Days/{dayid:int}"
+﻿@page "/Days/{dayI:int}"
 @inject HttpClient Http
+@inject IJSRuntime _jsRuntime 
 
-<h1>Day @dayid</h1>
-<hr />
+<div class="section">
+    <div class="container">
+        <h3>@title</h3>
+    </div>
 
-<div class="col-md-12 row">
-    <div >
-        <textarea readonly style="resize:none" rows="20" cols="60">@codeBlock</textarea>
-        <textarea style="resize:none" rows="20" cols="60" @bind="input"></textarea>
-    </div>
-</div>
+    <div class="container">
+        <hr />
 
-<div class="col-md-12">
-    <div>
-        <button class="btn btn-primary">Run Part 1</button>
-        <input placeholder="Part 1" />
+        <nav class="level">
+            <div class="level-left">
+                <div class="level-item">
+                    <button class="button is-dark" @onclick="RunCode"><b>Run Code</b></button>
+                </div>
+                <div class="level-item">
+                    <b>Part 1:</b>
+                </div>
+                <div class="level-item">
+                    <input class="input" readonly @bind="part1" />
+                </div>
+                <div class="level-item">
+                    <b>Part 2:</b>
+                </div>
+                <div class="level-item">
+                    <input class="input" readonly @bind="part2" />
+                </div>
+            </div>
+        </nav>
     </div>
-    <div style="margin-top:4px">
-        <button class="btn btn-primary">Run Part 2</button>
-        <input placeholder="Part 2" />
+    <div class="container">
+        <div class="tabs is-fullwidth">
+            <ul>
+                <li class="@((showInput) ? "is-active" : "")">
+                    <a @onclick="ShowInput"><b>Input</b></a>
+                </li>
+                <li class="@((showCode) ? "is-active" : "")">
+                    <a @onclick="ShowCode"><b>Code</b></a>
+                </li>
+            </ul>
+        </div>
     </div>
+
+    @if (showCode)
+    {
+        <div class="container">
+            <div>
+                @*<textarea class="textarea" rows="30">@codeBlock</textarea>*@
+                <pre><code class="language-csharp">@codeBlock</code></pre>
+            </div>
+        </div>
+    }
+
+    @if (showInput)
+    {
+
+        <div class="container">
+            <div>
+                <textarea class="textarea" rows="30" @bind="input"></textarea>
+            </div>
+        </div>
+
+    }
 </div>
 
 @code {
     [Parameter]
-    public int dayid { get; set; }
+    public int dayI { get; set; }
+
+    private string title;
 
     private string input { get; set; }
+    private string part1 { get; set; }
+    private string part2 { get; set; }
 
     private string codeBlock = string.Empty;
     private string defaultInput = string.Empty;
+    private bool showCode = false;
+    private bool showInput = true;
+
+    Code._2020.Solution solution;
 
     protected override async Task OnInitializedAsync()
     {
-        codeBlock = (await Http.ge($"Code/2020/Day{dayid}/Day{dayid}.cs")).ToString();
-        input = await Http.GetStringAsync($"Code/2020/Day{dayid}/day{dayid}input.txt");
+        codeBlock = await Http.GetStringAsync($"Code/2020/Day{dayI}/Day{dayI}.txt");
+        input = await Http.GetStringAsync($"Code/2020/Day{dayI}/day{dayI}input.txt");
+        solution = SolutionConstructor.SetSolution($"Day{dayI}", input);
+        title = GetAttribute(solution.GetType());
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await _jsRuntime.InvokeVoidAsync("Prism.highlightAll");
+    }
+
+    private void RunCode()
+    {
+        Code._2020.Solution solution = SolutionConstructor.SetSolution($"Day{dayI}", input);
+
+        part1 = solution.GetPart1(); // run async?
+        part2 = solution.GetPart2(); // run async?
+    }
+
+    private void ShowInput()
+    {
+        showInput = true;
+        showCode = false;
+    }
+
+    private void ShowCode()
+    {
+        showInput = false;
+        showCode = true;
+    }
+
+    private string GetAttribute(System.Type t)
+    {
+        System.Attribute[] attrs = System.Attribute.GetCustomAttributes(t);
+        foreach(System.Attribute attr in attrs)
+        {
+            if(attr is PuzzleAttribute)
+            {
+                PuzzleAttribute n = (PuzzleAttribute)attr;
+                return $"Day {n.dayid} - {n.title}";
+            }
+        }
+
+        return "";
     }
 }

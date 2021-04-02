@@ -96,7 +96,14 @@ using Blazor_AoC.Pages;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/Days/{dayid:int}")]
+#nullable restore
+#line 13 "C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\_Imports.razor"
+using Blazor_AoC.Code;
+
+#line default
+#line hidden
+#nullable disable
+    [Microsoft.AspNetCore.Components.RouteAttribute("/Days/{dayI:int}")]
     public partial class DayComponent : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -105,25 +112,76 @@ using Blazor_AoC.Pages;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 25 "C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\Pages\DayComponent.razor"
+#line 68 "C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\Pages\DayComponent.razor"
        
     [Parameter]
-    public int dayid { get; set; }
+    public int dayI { get; set; }
+
+    private string title;
 
     private string input { get; set; }
+    private string part1 { get; set; }
+    private string part2 { get; set; }
 
     private string codeBlock = string.Empty;
     private string defaultInput = string.Empty;
+    private bool showCode = false;
+    private bool showInput = true;
+
+    Code._2020.Solution solution;
 
     protected override async Task OnInitializedAsync()
     {
-        codeBlock = (await Http.ge($"Code/2020/Day{dayid}/Day{dayid}.cs")).ToString();
-        input = await Http.GetStringAsync($"Code/2020/Day{dayid}/day{dayid}input.txt");
+        codeBlock = await Http.GetStringAsync($"Code/2020/Day{dayI}/Day{dayI}.txt");
+        input = await Http.GetStringAsync($"Code/2020/Day{dayI}/day{dayI}input.txt");
+        solution = SolutionConstructor.SetSolution($"Day{dayI}", input);
+        title = GetAttribute(solution.GetType());
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        await _jsRuntime.InvokeVoidAsync("Prism.highlightAll");
+    }
+
+    private void RunCode()
+    {
+        Code._2020.Solution solution = SolutionConstructor.SetSolution($"Day{dayI}", input);
+
+        part1 = solution.GetPart1(); // run async?
+        part2 = solution.GetPart2(); // run async?
+    }
+
+    private void ShowInput()
+    {
+        showInput = true;
+        showCode = false;
+    }
+
+    private void ShowCode()
+    {
+        showInput = false;
+        showCode = true;
+    }
+
+    private string GetAttribute(System.Type t)
+    {
+        System.Attribute[] attrs = System.Attribute.GetCustomAttributes(t);
+        foreach(System.Attribute attr in attrs)
+        {
+            if(attr is PuzzleAttribute)
+            {
+                PuzzleAttribute n = (PuzzleAttribute)attr;
+                return $"Day {n.dayid} - {n.title}";
+            }
+        }
+
+        return "";
     }
 
 #line default
 #line hidden
 #nullable disable
+        [global::Microsoft.AspNetCore.Components.InjectAttribute] private IJSRuntime _jsRuntime { get; set; }
         [global::Microsoft.AspNetCore.Components.InjectAttribute] private HttpClient Http { get; set; }
     }
 }

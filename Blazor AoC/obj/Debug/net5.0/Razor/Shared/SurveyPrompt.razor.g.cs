@@ -93,6 +93,13 @@ using Blazor_AoC.Pages;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 13 "C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\_Imports.razor"
+using Blazor_AoC.Code;
+
+#line default
+#line hidden
+#nullable disable
     public partial class SurveyPrompt : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998

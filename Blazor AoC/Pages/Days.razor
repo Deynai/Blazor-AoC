@@ -1,44 +1,45 @@
 ﻿@page "/2020"
 @inject HttpClient Http
 
-<h1> 2020 </h1>
+<div class="section">
+    <div class="container">
+        <h3>2020</h3>
+    </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Day</th>
-            <th>Title</th>
-            <th>Summary</th>
-        </tr>
-    </thead>
+    <div class="container">
+        <hr />
 
-    @if (days == null)
-    {
-        <p><em>Loading...</em></p>
-    }
-    else
-    {
-        <tbody>
-            @foreach (dayInfo day in days)
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Day</th>
+                    <th>Title</th>
+                    <th>Summary</th>
+                </tr>
+            </thead>
+
+            @if (days == null)
             {
-                <DaySummaryComponent dayInfo="@day"></DaySummaryComponent>
+                <p><em>Loading...</em></p>
             }
-        </tbody>
-    }
-</table>
+            else
+            {
+                <tbody>
+                    @foreach (dayInfo day in days)
+                    {
+                        <DaySummaryComponent dayI="@day"></DaySummaryComponent>
+                    }
+                </tbody>
+            }
+        </table>
+    </div>
+</div>
 
-@code {
-    public dayInfo[] days;
+    @code {
+        public dayInfo[] days;
 
-    protected override async Task OnInitializedAsync()
-    {
-        days = await Http.GetFromJsonAsync<dayInfo[]>("sample-data/dayinfo.json");
+        protected override async Task OnInitializedAsync()
+        {
+            days = await Http.GetFromJsonAsync<dayInfo[]>("sample-data/dayinfo.json");
+        }
     }
-
-    public class dayInfo
-    {
-        public int Day { get; set; }
-        public string Title { get; set; }
-        public string Summary { get; set; }
-    }
-}

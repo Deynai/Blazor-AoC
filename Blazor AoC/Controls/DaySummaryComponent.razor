@@ -1,23 +1,18 @@
 ﻿@inject NavigationManager NavigationManager
 
 <tr class="asd" @onclick="SelectDay">
-    <td><b>Day @dayInfo.Day</b></td>
-    <td><b>@dayInfo.Title</b></td>
-    <td><b>@dayInfo.Summary</b></td>
+    <td><b>Day @dayI.Day</b></td>
+    <td><b>@dayI.Title</b></td>
+    <td><b>@dayI.Summary</b></td>
 </tr>
 
 @code {
     [Parameter]
-    public Days.dayInfo dayInfo { get; set; }
+    public dayInfo dayI { get; set; }
 
     private void SelectDay()
     {
-        NavigationManager.NavigateTo("/days/" + dayInfo.Day.ToString());
+        NavigationManager.NavigateTo("/days/" + dayI.Day.ToString());
         // open page with the corresponding number
-    }
-
-    private void Highlight()
-    {
-
     }
 }

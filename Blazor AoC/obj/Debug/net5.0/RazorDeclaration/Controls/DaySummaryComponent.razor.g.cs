@@ -96,6 +96,13 @@ using Blazor_AoC.Pages;
 #line default
 #line hidden
 #nullable disable
+#nullable restore
+#line 13 "C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\_Imports.razor"
+using Blazor_AoC.Code;
+
+#line default
+#line hidden
+#nullable disable
     public partial class DaySummaryComponent : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -107,17 +114,12 @@ using Blazor_AoC.Pages;
 #line 9 "C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\Controls\DaySummaryComponent.razor"
        
     [Parameter]
-    public Days.dayInfo dayInfo { get; set; }
+    public dayInfo dayI { get; set; }
 
     private void SelectDay()
     {
-        NavigationManager.NavigateTo("/days/" + dayInfo.Day.ToString());
+        NavigationManager.NavigateTo("/days/" + dayI.Day.ToString());
         // open page with the corresponding number
-    }
-
-    private void Highlight()
-    {
-
     }
 
 #line default

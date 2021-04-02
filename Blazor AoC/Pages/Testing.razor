@@ -1,0 +1,16 @@
+﻿@page "/testing" 
+
+<h1>Testing Page</h1>
+
+<h3>Count: @count</h3>
+
+<CounterComponent SetCount="SetCount1"></CounterComponent>
+
+@code {
+    private int count;
+
+    private void SetCount1(int value)
+    {
+        count = value;
+    }
+}

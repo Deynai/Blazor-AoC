@@ -18,4 +18,14 @@ namespace Blazor_AoC.Code._2020
             return "Part 2 Error";
         }
     }
+
+    public class DayTitle : System.Attribute
+    {
+        private string name;
+
+        public DayTitle(string name)
+        {
+            this.name = name;
+        }
+    }
 }

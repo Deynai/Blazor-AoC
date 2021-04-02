@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "9u8lqm+5WLJSPUT0hXvcKJCnSb83KNfmDddxaBcuR4SQZjWwOeSw21RucailIOGGBK18bR238FK+ENbiv2O3Gg==",
+  "dgSpecHash": "2ULqQDBa2QoHqyefidKSE/kCWxvpkqQlA6GaENEkhzULptGySo6F/Hdmw4PzDSnhdItAgiH5cesSjNl9LJ5dYw==",
   "success": true,
   "projectFilePath": "C:\\Users\\rowan\\Source\\Repos\\Blazor AoC\\Blazor-AoC\\Blazor AoC\\Blazor AoC.csproj",
   "expectedPackageFiles": [
@@ -28,6 +28,7 @@
     "C:\\Users\\rowan\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
     "C:\\Users\\rowan\\.nuget\\packages\\microsoft.jsinterop\\5.0.2\\microsoft.jsinterop.5.0.2.nupkg.sha512",
     "C:\\Users\\rowan\\.nuget\\packages\\microsoft.jsinterop.webassembly\\5.0.2\\microsoft.jsinterop.webassembly.5.0.2.nupkg.sha512",
+    "C:\\Users\\rowan\\.nuget\\packages\\octokit\\0.50.0\\octokit.0.50.0.nupkg.sha512",
     "C:\\Users\\rowan\\.nuget\\packages\\system.io.pipelines\\5.0.1\\system.io.pipelines.5.0.1.nupkg.sha512",
     "C:\\Users\\rowan\\.nuget\\packages\\system.net.http.json\\5.0.0\\system.net.http.json.5.0.0.nupkg.sha512",
     "C:\\Users\\rowan\\.nuget\\packages\\microsoft.netcore.app.runtime.browser-wasm\\5.0.2\\microsoft.netcore.app.runtime.browser-wasm.5.0.2.nupkg.sha512"

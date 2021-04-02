@@ -6,13 +6,72 @@
 
   <ItemGroup>
     <Content Remove="Code\2020\Day1\Day1.cs" />
-    <Content Remove="Code\2020\Day1\day1input.txt" />
+    <Content Remove="wwwroot\Code\2020\Day1\day1input.txt" />
+    <Content Remove="wwwroot\Code\2020\Day2\day2input.txt" />
+    <Content Remove="wwwroot\Code\2020\Day3\day3input.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Code\2020\Day1\day1input.txt" />
+    <None Include="wwwroot\Code\2020\Day2\day2input.txt" />
+    <None Include="wwwroot\Code\2020\Day3\day3input.txt" />
+    <None Include="wwwroot\css\bulma\bulma-rtl.css.map" />
+    <None Include="wwwroot\css\bulma\bulma.css.map" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.2" PrivateAssets="all" />
+    <PackageReference Include="Octokit" Version="0.50.0" />
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Code\2020\Day10\" />
+    <Folder Include="Code\2020\Day11\" />
+    <Folder Include="Code\2020\Day12\" />
+    <Folder Include="Code\2020\Day13\" />
+    <Folder Include="Code\2020\Day14\" />
+    <Folder Include="Code\2020\Day15\" />
+    <Folder Include="Code\2020\Day16\" />
+    <Folder Include="Code\2020\Day17\" />
+    <Folder Include="Code\2020\Day18\" />
+    <Folder Include="Code\2020\Day19\" />
+    <Folder Include="Code\2020\Day20\" />
+    <Folder Include="Code\2020\Day21\" />
+    <Folder Include="Code\2020\Day22\" />
+    <Folder Include="Code\2020\Day23\" />
+    <Folder Include="Code\2020\Day24\" />
+    <Folder Include="Code\2020\Day25\" />
+    <Folder Include="Code\2020\Day3\" />
+    <Folder Include="Code\2020\Day4\" />
+    <Folder Include="Code\2020\Day5\" />
+    <Folder Include="Code\2020\Day6\" />
+    <Folder Include="Code\2020\Day7\" />
+    <Folder Include="Code\2020\Day8\" />
+    <Folder Include="Code\2020\Day9\" />
+    <Folder Include="wwwroot\Code\2020\Day4\" />
+    <Folder Include="wwwroot\Code\2020\Day5\" />
+    <Folder Include="wwwroot\Code\2020\Day6\" />
+    <Folder Include="wwwroot\Code\2020\Day7\" />
+    <Folder Include="wwwroot\Code\2020\Day8\" />
+    <Folder Include="wwwroot\Code\2020\Day9\" />
+    <Folder Include="wwwroot\Code\2020\Day10\" />
+    <Folder Include="wwwroot\Code\2020\Day11\" />
+    <Folder Include="wwwroot\Code\2020\Day12\" />
+    <Folder Include="wwwroot\Code\2020\Day13\" />
+    <Folder Include="wwwroot\Code\2020\Day14\" />
+    <Folder Include="wwwroot\Code\2020\Day15\" />
+    <Folder Include="wwwroot\Code\2020\Day16\" />
+    <Folder Include="wwwroot\Code\2020\Day17\" />
+    <Folder Include="wwwroot\Code\2020\Day18\" />
+    <Folder Include="wwwroot\Code\2020\Day19\" />
+    <Folder Include="wwwroot\Code\2020\Day20\" />
+    <Folder Include="wwwroot\Code\2020\Day21\" />
+    <Folder Include="wwwroot\Code\2020\Day22\" />
+    <Folder Include="wwwroot\Code\2020\Day23\" />
+    <Folder Include="wwwroot\Code\2020\Day24\" />
+    <Folder Include="wwwroot\Code\2020\Day25\" />
   </ItemGroup>
 
 </Project>
