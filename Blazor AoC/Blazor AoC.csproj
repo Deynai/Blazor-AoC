@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="Code\2020\Day1\Day1.cs" />
+    <Content Remove="Code\2020\Day01\Day1.cs" />
     <Content Remove="wwwroot\Code\2020\Day10\day10input.txt" />
     <Content Remove="wwwroot\Code\2020\Day11\day11input.txt" />
     <Content Remove="wwwroot\Code\2020\Day12\day12input.txt" />
@@ -16,21 +16,21 @@
     <Content Remove="wwwroot\Code\2020\Day17\day17input.txt" />
     <Content Remove="wwwroot\Code\2020\Day18\day18input.txt" />
     <Content Remove="wwwroot\Code\2020\Day19\day19input.txt" />
-    <Content Remove="wwwroot\Code\2020\Day1\day1input.txt" />
+    <Content Remove="wwwroot\Code\2020\Day01\day1input.txt" />
     <Content Remove="wwwroot\Code\2020\Day20\day20input.txt" />
     <Content Remove="wwwroot\Code\2020\Day21\day21input.txt" />
     <Content Remove="wwwroot\Code\2020\Day22\day22input.txt" />
     <Content Remove="wwwroot\Code\2020\Day23\day23input.txt" />
     <Content Remove="wwwroot\Code\2020\Day24\day24input.txt" />
     <Content Remove="wwwroot\Code\2020\Day25\day25input.txt" />
-    <Content Remove="wwwroot\Code\2020\Day2\day2input.txt" />
-    <Content Remove="wwwroot\Code\2020\Day3\day3input.txt" />
-    <Content Remove="wwwroot\Code\2020\Day4\day4input.txt" />
-    <Content Remove="wwwroot\Code\2020\Day5\day5input.txt" />
-    <Content Remove="wwwroot\Code\2020\Day6\day6input.txt" />
-    <Content Remove="wwwroot\Code\2020\Day7\day7input.txt" />
-    <Content Remove="wwwroot\Code\2020\Day8\day8input.txt" />
-    <Content Remove="wwwroot\Code\2020\Day9\day9input.txt" />
+    <Content Remove="wwwroot\Code\2020\Day02\day2input.txt" />
+    <Content Remove="wwwroot\Code\2020\Day03\day3input.txt" />
+    <Content Remove="wwwroot\Code\2020\Day04\day4input.txt" />
+    <Content Remove="wwwroot\Code\2020\Day05\day5input.txt" />
+    <Content Remove="wwwroot\Code\2020\Day06\day6input.txt" />
+    <Content Remove="wwwroot\Code\2020\Day07\day7input.txt" />
+    <Content Remove="wwwroot\Code\2020\Day08\day8input.txt" />
+    <Content Remove="wwwroot\Code\2020\Day09\day9input.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,21 +44,21 @@
     <None Include="wwwroot\Code\2020\Day17\day17input.txt" />
     <None Include="wwwroot\Code\2020\Day18\day18input.txt" />
     <None Include="wwwroot\Code\2020\Day19\day19input.txt" />
-    <None Include="wwwroot\Code\2020\Day1\day1input.txt" />
+    <None Include="wwwroot\Code\2020\Day01\day1input.txt" />
     <None Include="wwwroot\Code\2020\Day20\day20input.txt" />
     <None Include="wwwroot\Code\2020\Day21\day21input.txt" />
     <None Include="wwwroot\Code\2020\Day22\day22input.txt" />
     <None Include="wwwroot\Code\2020\Day23\day23input.txt" />
     <None Include="wwwroot\Code\2020\Day24\day24input.txt" />
     <None Include="wwwroot\Code\2020\Day25\day25input.txt" />
-    <None Include="wwwroot\Code\2020\Day2\day2input.txt" />
-    <None Include="wwwroot\Code\2020\Day3\day3input.txt" />
-    <None Include="wwwroot\Code\2020\Day4\day4input.txt" />
-    <None Include="wwwroot\Code\2020\Day5\day5input.txt" />
-    <None Include="wwwroot\Code\2020\Day6\day6input.txt" />
-    <None Include="wwwroot\Code\2020\Day7\day7input.txt" />
-    <None Include="wwwroot\Code\2020\Day8\day8input.txt" />
-    <None Include="wwwroot\Code\2020\Day9\day9input.txt" />
+    <None Include="wwwroot\Code\2020\Day02\day2input.txt" />
+    <None Include="wwwroot\Code\2020\Day03\day3input.txt" />
+    <None Include="wwwroot\Code\2020\Day04\day4input.txt" />
+    <None Include="wwwroot\Code\2020\Day05\day5input.txt" />
+    <None Include="wwwroot\Code\2020\Day06\day6input.txt" />
+    <None Include="wwwroot\Code\2020\Day07\day7input.txt" />
+    <None Include="wwwroot\Code\2020\Day08\day8input.txt" />
+    <None Include="wwwroot\Code\2020\Day09\day9input.txt" />
     <None Include="wwwroot\css\bulma\bulma-rtl.css.map" />
     <None Include="wwwroot\css\bulma\bulma.css.map" />
   </ItemGroup>

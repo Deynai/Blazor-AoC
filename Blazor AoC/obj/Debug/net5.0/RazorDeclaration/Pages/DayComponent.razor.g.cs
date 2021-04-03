@@ -132,9 +132,9 @@ using Blazor_AoC.Code;
 
     protected override async Task OnInitializedAsync()
     {
-        codeBlock = await Http.GetStringAsync($"Code/2020/Day{dayI}/Day{dayI}.txt");
-        input = await Http.GetStringAsync($"Code/2020/Day{dayI}/day{dayI}input.txt");
-        solution = SolutionConstructor.SetSolution($"Day{dayI}", input);
+        codeBlock = await Http.GetStringAsync("Code/2020/Day" + dayI.ToString("D2") + "/Day" + dayI + ".txt");
+        input = await Http.GetStringAsync("Code/2020/Day" + dayI.ToString("D2") + "/day" + dayI + "input.txt");
+        solution = SolutionConstructor.SetSolution("Day" + dayI, input);
         title = GetAttribute(solution.GetType());
     }
 
