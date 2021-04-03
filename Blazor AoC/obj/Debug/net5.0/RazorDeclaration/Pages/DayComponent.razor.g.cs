@@ -147,8 +147,8 @@ using Blazor_AoC.Code;
     {
         Code._2020.Solution solution = SolutionConstructor.SetSolution($"Day{dayI}", input);
 
-        part1 = solution.GetPart1(); // run async?
-        part2 = solution.GetPart2(); // run async?
+        try { part1 = solution.GetPart1(); } catch (Exception e) { part1 = e.ToString(); } // run async?
+        try { part2 = solution.GetPart2(); } catch (Exception e) { part2 = e.ToString(); } // run async?
     }
 
     private void ShowInput()

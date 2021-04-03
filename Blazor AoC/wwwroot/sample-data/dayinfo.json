@@ -2,16 +2,27 @@
   {
     "Day": 1,
     "Title": "Report Repair",
-    "Summary": "Find two and three numbers in a list that sum to 2020"
+    "Summary": "Find pairs of two and three numbers from a given list that sum to 2020"
   },
   {
     "Day": 2,
     "Title": "Password Philosophy",
-    "Summary": "Find valid passwords in a list according to rules on characters"
+    "Summary": "Find how many passwords are valid according to certain rules on the characters"
   },
   {
     "Day": 3,
     "Title": "Toboggan Trajectory",
-    "Summary": "Find number of collisions with trees while traversing a forest along a line"
+    "Summary": "Find the number of collisions with trees in a forest while moving in a straight line"
+  },
+  {
+    "Day": 4,
+    "Title": "Passport Processing",
+    "Summary": "Find how many passports are valid according to certain field requirements"
+  },
+  {
+    "Day": 5,
+    "Title": "Binary Boarding",
+    "Summary": "Sort through aeroplane boarding passes and find your seat number"
   }
+
 ]
