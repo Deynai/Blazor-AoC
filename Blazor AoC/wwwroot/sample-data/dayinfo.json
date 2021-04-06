@@ -38,6 +38,11 @@
     "Day": 8,
     "Title": "Handheld Halting",
     "Summary": "Debugging faulty machine code instructions for a console boot program"
+  },
+  {
+    "Day": 9,
+    "Title": "Encoding Error",
+    "Summary": "Finding contigious sums in an outdated \"XMAS\" cypher"
   }
 
 ]
