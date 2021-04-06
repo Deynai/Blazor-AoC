@@ -23,9 +23,8 @@ jobs:
     - name: Publish .NET Core Project
       run: dotnet publish BlazorGitHubPagesDemo.csproj -c Release -o release --nologo
       
-    - name: Commit wwwroot to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@3.7.1
+    - name: Deploy 🚀
+      uses: JamesIves/github-pages-deploy-action@4.1.1
       with:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        BRANCH: gh-pages
-        FOLDER: Blazor AoC/wwwroot
+        branch: gh-pages # The branch the action should deploy to.
+        folder: Blazor AoC/wwwroot # The folder the action should deploy.
