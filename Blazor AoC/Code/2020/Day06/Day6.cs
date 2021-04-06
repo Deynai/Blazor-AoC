@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Blazor_AoC.Code._2020
 {
-    [Puzzle(6, "")]
+    [Puzzle(6, "Custom Customs")]
     public class Day6 : Solution
     {
         private string inputString = string.Empty;
@@ -17,12 +17,25 @@ namespace Blazor_AoC.Code._2020
 
         public override string GetPart1()
         {
-            return base.GetPart1();
+            return inputString.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.None)
+                            .Select(lines => lines.Replace("\r\n", string.Empty)
+                                                .Distinct()
+                                                .Count())
+                            .Aggregate((sum, counts) => sum + counts)
+                            .ToString();
         }
 
         public override string GetPart2()
         {
-            return base.GetPart2();
+            return inputString.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.None)
+                            .Select(lines => lines.Split(new string[] { "\r\n" }, StringSplitOptions.None))
+                            .Select(str => str.Skip(1)
+                                        .Aggregate(new HashSet<char>(str.First()),
+                                                    (set, c) => { set.IntersectWith(c); return set; })
+                                        .Count()
+                                   )
+                            .Aggregate((sum, counts) => sum + counts)
+                            .ToString();
         }
     }
 }

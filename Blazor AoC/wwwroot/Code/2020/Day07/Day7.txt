@@ -2,74 +2,106 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Blazor_AoC.Code._2020
 {
-    public class Day1 : Solution
+    [Puzzle(7, "Handy Haversacks")]
+    public class Day7 : Solution
     {
-        string inputString = string.Empty;
-        int[] input;
+        private string inputString = string.Empty;
+        Dictionary<string, List<(string bag, int amount)>> bagsGraph;
 
-        public Day1(string inputBox)
+        // Memoisation dicts to cut down on recursion steps
+        Dictionary<string, bool> containsMemo = new Dictionary<string, bool>();
+        Dictionary<string, int> childMemo = new Dictionary<string, int>();
+
+        public Day7(string inputBox)
         {
             inputString = inputBox;
         }
 
         public override string GetPart1()
         {
-            input = inputString.Split('\n').Select(str => int.Parse(str)).OrderBy(x => x).ToArray();
+            ParseInput();
 
-            (int, int) pair = FindPair(input, 2020);
-            return (pair.Item1 * pair.Item2).ToString();
+            return bagsGraph.Keys.Select(k => ContainsGold(k) ? 1 : 0)
+                                .Aggregate((s, c) => s + c)
+                                .ToString();
         }
 
         public override string GetPart2()
         {
-            for(int i = 0; i < input.Length; i++)
-            {
-                (int, int) pair = FindPair(input, 2020 - input[i], i);
-                if (!pair.Item1.Equals(-1))
-                {
-                    return (pair.Item1 * pair.Item2 * input[i]).ToString();
-                }
-            }
-
-            return "Error";
+            return ChildAmount("shiny gold").ToString();
         }
 
-        public (int, int) FindPair(int[] input, int target, int exception = -1)
+        private bool ContainsGold(string bag)
         {
-            int lower = 0;
-            int upper = input.Length - 1;
-
-            while (!upper.Equals(lower))
+            if (containsMemo.ContainsKey(bag))
             {
-                int val = input[lower] + input[upper];
+                return containsMemo[bag];
+            }
 
-                if (val.Equals(target))
-                {
-                    return (input[lower], input[upper]);
-                }
+            if (bagsGraph[bag].Count.Equals(0))
+            {
+                return false;
+            }
 
-                if (val < target)
+            foreach ((string bag, int count) subBag in bagsGraph[bag])
+            {
+                if (subBag.bag.Equals("shiny gold"))
                 {
-                    lower++;
-                    if (lower.Equals(exception))
-                    {
-                        lower++;
-                    }
+                    containsMemo.Add(bag, true);
+                    return true;
                 }
-                else
+                
+                if (ContainsGold(subBag.bag))
                 {
-                    upper--;
-                    if (upper.Equals(exception))
-                    {
-                        upper--;
-                    }
+                    containsMemo.Add(bag, true);
+                    return true;
                 }
             }
 
-            return (-1, -1);
+            containsMemo.Add(bag, false);
+            return false;
+        }
+
+        private int ChildAmount(string bag)
+        {
+            if (childMemo.ContainsKey(bag))
+            {
+                return childMemo[bag];
+            }
+
+            if (bagsGraph[bag].Count.Equals(0))
+            {
+                return 0;
+            }
+
+            int amount = 0;
+            foreach ((string bag, int count) subBag in bagsGraph[bag])
+            {
+                amount += (1 + ChildAmount(subBag.bag)) * subBag.count;
+            }
+
+            childMemo.Add(bag, amount);
+            return amount;
+        }
+
+        private void ParseInput()
+        {
+            bagsGraph = inputString.Split(new string[] { "\r\n" }, StringSplitOptions.None)
+                                .Select(line => { return Regex.Replace(line, @" bags contain | bag(s)?(, )?(\.)?|no other bags\.", ""); }) // remove unnecessary language
+                                .Select(line2 =>
+                                {
+                                    return Regex.Replace(line2, @"(\d) ", ",$1-") // this will format as, e.g: "posh orange,5-muted green,3-striped violet"
+                                                .Split(',');
+                                })
+                                .Select(line3 => (
+                                    mainBag: line3.First(),
+                                    subBags: line3.Skip(1).Select(b => { var split = b.Split('-'); return (split[1], int.Parse(split[0])); }).ToList()
+                                ))
+                                .ToDictionary(d => d.mainBag, d => d.subBags);
         }
     }
 }

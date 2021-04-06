@@ -23,6 +23,21 @@
     "Day": 5,
     "Title": "Binary Boarding",
     "Summary": "Sort through aeroplane boarding passes and find your seat number"
+  },
+  {
+    "Day": 6,
+    "Title": "Custom Customs",
+    "Summary": "Find the union and intersection of sets of customs declaration form responses"
+  },
+  {
+    "Day": 7,
+    "Title": "Handy Haversacks",
+    "Summary": "Bags containing other bags. How many contain a shiny gold bag and what's inside?"
+  },
+  {
+    "Day": 8,
+    "Title": "Handheld Halting",
+    "Summary": "Debugging faulty machine code instructions for a console boot program"
   }
 
 ]
