@@ -10,12 +10,12 @@ namespace Blazor_AoC.Code._2020
     {
         public virtual string GetPart1()
         {
-            return "Part 1 Error";
+            return "Not Implemented";
         }
 
         public virtual string GetPart2()
         {
-            return "Part 2 Error";
+            return "Not Implemented";
         }
     }
 

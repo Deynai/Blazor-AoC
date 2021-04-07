@@ -5,71 +5,110 @@ using System.Threading.Tasks;
 
 namespace Blazor_AoC.Code._2020
 {
-    public class Day1 : Solution
+    [Puzzle(8, "Handheld Halting")]
+    public class Day8 : Solution
     {
-        string inputString = string.Empty;
-        int[] input;
+        private string inputString = string.Empty;
 
-        public Day1(string inputBox)
+        List<(string op, int val)> input_instructions;
+        Dictionary<int, (string op, int val)> visited_part1 = new Dictionary<int, (string, int)>(); // this will store lines visited in part 1
+
+        public Day8(string inputBox)
         {
             inputString = inputBox;
         }
 
         public override string GetPart1()
         {
-            input = inputString.Split('\n').Select(str => int.Parse(str)).OrderBy(x => x).ToArray();
+            ParseInput();
 
-            (int, int) pair = FindPair(input, 2020);
-            return (pair.Item1 * pair.Item2).ToString();
+            int accum;
+            RunProgram(input_instructions, out accum, visited_part1);
+            return accum.ToString();
         }
 
         public override string GetPart2()
         {
-            for(int i = 0; i < input.Length; i++)
+            // add the termination operation to the instructions
+            input_instructions.Add(("end", 0));
+
+            // we need only consider nop and jmp operations that were in the initial loop
+            foreach(int index in visited_part1.Keys)
             {
-                (int, int) pair = FindPair(input, 2020 - input[i], i);
-                if (!pair.Item1.Equals(-1))
+                if (input_instructions[index].op.Equals("acc")) { continue; }
+
+                Swap_NopJmp(index);
+                int accum;
+                if(RunProgram(input_instructions, out accum))
                 {
-                    return (pair.Item1 * pair.Item2 * input[i]).ToString();
+                    return accum.ToString();
                 }
+                // Swap back
+                Swap_NopJmp(index);
             }
 
-            return "Error";
+            return "No fix found";
         }
 
-        public (int, int) FindPair(int[] input, int target, int exception = -1)
+        private void Swap_NopJmp(int index)
         {
-            int lower = 0;
-            int upper = input.Length - 1;
-
-            while (!upper.Equals(lower))
+            if (input_instructions[index].op.Equals("nop"))
             {
-                int val = input[lower] + input[upper];
+                input_instructions[index] = ("jmp", input_instructions[index].val);
+            }
+            else if (input_instructions[index].op.Equals("jmp"))
+            {
+                input_instructions[index] = ("nop", input_instructions[index].val);
+            }
+        }
 
-                if (val.Equals(target))
-                {
-                    return (input[lower], input[upper]);
-                }
+        // returns true if program terminates
+        private bool RunProgram(List<(string op, int val)> instructions, out int accumulator, Dictionary<int, (string, int)> visited = null)
+        {
+            if (visited == null)
+            {
+                visited = new Dictionary<int, (string, int)>();
+            }
 
-                if (val < target)
+            accumulator = 0;
+            int index = 0;
+
+            while (!visited.ContainsKey(index))
+            {
+                (string op, int val) instruction = instructions[index];
+                visited.Add(index, instruction);
+
+                switch (instruction.op)
                 {
-                    lower++;
-                    if (lower.Equals(exception))
-                    {
-                        lower++;
-                    }
-                }
-                else
-                {
-                    upper--;
-                    if (upper.Equals(exception))
-                    {
-                        upper--;
-                    }
+                    case "nop":
+                        index++;
+                        break;
+                    case "acc":
+                        accumulator += instruction.val;
+                        index++;
+                        break;
+                    case "jmp":
+                        index += instruction.val;
+                        break;
+                    case "end":
+                        return true;
+                    default: // input error
+                        throw new InvalidOperationException("Invalid Instruction");
                 }
             }
 
-            return (-1, -1);
+            return false;
+        }
+
+        private void ParseInput()
+        {
+            input_instructions = inputString.Split("\r\n")
+                                            .Select(line =>
+                                                {
+                                                    var split = line.Split(" "); 
+                                                    return (op: split[0], val: int.Parse(split[1])); 
+                                                })
+                                            .ToList();
         }
     }
 }
