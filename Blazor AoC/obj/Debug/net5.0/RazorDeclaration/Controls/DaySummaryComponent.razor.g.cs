@@ -118,7 +118,7 @@ using Blazor_AoC.Code;
 
     private void SelectDay()
     {
-        NavigationManager.NavigateTo("/days/" + dayI.Day.ToString());
+        NavigationManager.NavigateTo("days/" + dayI.Day.ToString());
         // open page with the corresponding number
     }
 
