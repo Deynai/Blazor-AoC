@@ -1,9 +1,9 @@
 name: AoC Solutions
 
-# Run workflow on every push to the master branch
+# Run workflow on every push to the main branch
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
     
 jobs:
   deploy-to-github-pages:
@@ -15,16 +15,16 @@ jobs:
 
     # sets up .NET Core SDK 3.1
     - name: Setup .NET Core SDK
-      uses: actions/setup-dotnet@v1
+    - uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1
+        dotnet-version: '3.1.x' # SDK Version to use; x will use the latest version of the 3.1 channel
         
          # publishes Blazor project to the release-folder
     - name: Publish .NET Core Project
-      run: dotnet publish BlazorGitHubPagesDemo.csproj -c Release -o release --nologo
+      run: dotnet publish "Blazor AoC/Blazor AoC.csproj" -c Release -o release --nologo
       
     - name: Deploy 🚀
       uses: JamesIves/github-pages-deploy-action@4.1.1
       with:
         branch: gh-pages # The branch the action should deploy to.
-        folder: Blazor AoC/wwwroot # The folder the action should deploy.
+        folder: release/wwwroot # The folder the action should deploy.
