@@ -1036,7 +1036,6 @@ C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\bin\Debug\net5.0\ww
 C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\bin\Debug\net5.0\wwwroot\_framework\icudt_EFIGS.dat
 C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\bin\Debug\net5.0\wwwroot\_framework\icudt_no_CJK.dat
 C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\bin\Debug\net5.0\wwwroot\_framework\dotnet.5.0.2.js
-C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\obj\Debug\net5.0\Blazor AoC.csprojAssemblyReference.cache
 C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\obj\Debug\net5.0\Blazor AoC.GeneratedMSBuildEditorConfig.editorconfig
 C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\obj\Debug\net5.0\Blazor AoC.AssemblyInfoInputs.cache
 C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\obj\Debug\net5.0\Blazor AoC.AssemblyInfo.cs
@@ -1284,3 +1283,4 @@ C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\obj\Debug\net5.0\Ra
 C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\obj\Debug\net5.0\Razor\Pages\Testing.razor.g.cs
 C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\obj\Debug\net5.0\RazorDeclaration\Controls\CounterComponent.razor.g.cs
 C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\obj\Debug\net5.0\Razor\Controls\CounterComponent.razor.g.cs
+C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\obj\Debug\net5.0\Blazor AoC.csprojAssemblyReference.cache
