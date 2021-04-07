@@ -18,7 +18,7 @@ namespace Blazor_AoC.Code._2020
 
         public Day7(string inputBox)
         {
-            inputString = inputBox;
+            inputString = inputBox.Replace("\r", string.Empty);
         }
 
         public override string GetPart1()
@@ -90,7 +90,7 @@ namespace Blazor_AoC.Code._2020
 
         private void ParseInput()
         {
-            bagsGraph = inputString.Split(new string[] { "\r\n" }, StringSplitOptions.None)
+            bagsGraph = inputString.Split(new string[] { "\n" }, StringSplitOptions.None)
                                 .Select(line => { return Regex.Replace(line, @" bags contain | bag(s)?(, )?(\.)?|no other bags\.", ""); }) // remove unnecessary language
                                 .Select(line2 =>
                                 {

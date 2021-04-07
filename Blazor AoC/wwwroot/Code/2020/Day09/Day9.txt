@@ -15,7 +15,7 @@ namespace Blazor_AoC.Code._2020
 
         public Day9(string inputBox)
         {
-            inputString = inputBox;
+            inputString = inputBox.Replace("\r", string.Empty);
             ParseInput();
         }
 
@@ -86,7 +86,7 @@ namespace Blazor_AoC.Code._2020
 
         private void ParseInput()
         {
-            input = inputString.Split("\r\n")
+            input = inputString.Split("\n")
                                .Select(num => long.Parse(num))
                                .ToList();
         }

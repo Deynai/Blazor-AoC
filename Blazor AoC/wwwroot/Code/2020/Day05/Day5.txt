@@ -13,7 +13,7 @@ namespace Blazor_AoC.Code._2020
 
         public Day5(string inputBox)
         {
-            inputString = inputBox;
+            inputString = inputBox.Replace("\r", string.Empty);
         }
 
         public override string GetPart1()
@@ -38,7 +38,7 @@ namespace Blazor_AoC.Code._2020
 
         private void ParseInput()
         {
-            passes = inputString.Split(new string[] { "\r\n" }, StringSplitOptions.None)
+            passes = inputString.Split(new string[] { "\n" }, StringSplitOptions.None)
                                 .Select(b => Convert.ToInt32(b.Replace('B', '1').Replace('R', '1').Replace('F', '0').Replace('L', '0'), 2))
                                 .OrderBy(x => x)
                                 .ToList();

@@ -15,7 +15,7 @@ namespace Blazor_AoC.Code._2020
         
         public Day4(string inputBox)
         {
-            inputString = inputBox;
+            inputString = inputBox.Replace("\r", string.Empty);
         }
 
         public override string GetPart1()
@@ -53,9 +53,9 @@ namespace Blazor_AoC.Code._2020
 
         private void ParseInput()
         {
-            passports = inputString.Split(new string[] { "\r\n\r\n" }, StringSplitOptions.RemoveEmptyEntries)
+            passports = inputString.Split(new string[] { "\n\n" }, StringSplitOptions.RemoveEmptyEntries)
                            .Select(p =>
-                               p.Split(new string[] { " ", "\r\n" }, StringSplitOptions.None)
+                               p.Split(new string[] { " ", "\n" }, StringSplitOptions.None)
                                 .Select(f => f.Split(':'))
                                 .ToDictionary(d => d[0], d => d[1])
                            )

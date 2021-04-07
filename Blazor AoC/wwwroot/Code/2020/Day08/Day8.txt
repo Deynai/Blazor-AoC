@@ -15,7 +15,7 @@ namespace Blazor_AoC.Code._2020
 
         public Day8(string inputBox)
         {
-            inputString = inputBox;
+            inputString = inputBox.Replace("\r", string.Empty);
         }
 
         public override string GetPart1()
@@ -102,7 +102,7 @@ namespace Blazor_AoC.Code._2020
 
         private void ParseInput()
         {
-            input_instructions = inputString.Split("\r\n")
+            input_instructions = inputString.Split("\n")
                                             .Select(line =>
                                                 {
                                                     var split = line.Split(" "); 
