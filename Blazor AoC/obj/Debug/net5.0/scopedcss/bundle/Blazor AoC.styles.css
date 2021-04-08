@@ -1,20 +1,20 @@
 /* /Pages/Days.razor.rz.scp.css */
 
-
-[b-8nrbseizwa] .asd:nth-child(odd) {
+[b-8nrbseizwa] .day-table-entry:nth-child(odd) {
     background-color: #585858;
 }
 
-[b-8nrbseizwa] .asd:nth-child(even) {
+[b-8nrbseizwa] .day-table-entry:nth-child(even) {
     background-color: #4a4a4a;
 }
 
-[b-8nrbseizwa] .asd:hover {
+[b-8nrbseizwa] .day-table-entry:hover {
     /*background-color: #aa5f03;*/
     outline-style: solid;
     outline-color: #fca840;
     outline-width: 2px;
-    outline-offset: -2px
+    outline-offset: -2px;
+    cursor: pointer
 }
 /* /Shared/MainLayout.razor.rz.scp.css */
 .page[b-49rz284ufw] {
@@ -146,6 +146,11 @@
 }
 
 @media (min-width: 641px) {
+
+    .top-row.pl-4.navbar.navbar-dark[b-icx9apfy2w] {
+        display: none;
+    }
+
     .navbar-toggler[b-icx9apfy2w] {
         display: none;
     }

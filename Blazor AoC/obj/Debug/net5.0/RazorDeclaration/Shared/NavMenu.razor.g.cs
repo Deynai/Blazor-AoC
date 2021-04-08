@@ -111,7 +111,7 @@ using Blazor_AoC.Code;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 49 "C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\Shared\NavMenu.razor"
+#line 51 "C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\Shared\NavMenu.razor"
        
     private bool collapseNavMenu = true;
 

@@ -103,7 +103,7 @@ using Blazor_AoC.Code;
 #line default
 #line hidden
 #nullable disable
-    [Microsoft.AspNetCore.Components.RouteAttribute("/Days/{dayI:int}")]
+    [Microsoft.AspNetCore.Components.RouteAttribute("/{year:int}/{day:int}")]
     public partial class DayComponent : Microsoft.AspNetCore.Components.ComponentBase
     {
         #pragma warning disable 1998
@@ -112,12 +112,13 @@ using Blazor_AoC.Code;
         }
         #pragma warning restore 1998
 #nullable restore
-#line 68 "C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\Pages\DayComponent.razor"
+#line 76 "C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\Pages\DayComponent.razor"
        
     [Parameter]
-    public int dayI { get; set; }
+    public int day { get; set; }
 
-    private string title;
+    [Parameter]
+    public int year { get; set; }
 
     private string input { get; set; }
     private string part1 { get; set; }
@@ -130,12 +131,15 @@ using Blazor_AoC.Code;
 
     Code._2020.Solution solution;
 
+    private dayInfo[] days { get; set; }
+    private dayInfo dayinfo { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
-        codeBlock = await Http.GetStringAsync("Code/2020/Day" + dayI.ToString("D2") + "/Day" + dayI + ".txt");
-        input = await Http.GetStringAsync("Code/2020/Day" + dayI.ToString("D2") + "/day" + dayI + "input.txt");
-        solution = SolutionConstructor.SetSolution("Day" + dayI, input);
-        title = GetAttribute(solution.GetType());
+        days = await Http.GetFromJsonAsync<dayInfo[]>($"sample-data/dayinfo{year}.json");
+        dayinfo = days.Where(p => p.Day.Equals(day)).First();
+        codeBlock = await Http.GetStringAsync("Code/2020/Day" + day.ToString("D2") + "/Day" + day + ".txt");
+        input = await Http.GetStringAsync("Code/2020/Day" + day.ToString("D2") + "/day" + day + "input.txt");
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -145,10 +149,9 @@ using Blazor_AoC.Code;
 
     private void RunCode()
     {
-        Code._2020.Solution solution = SolutionConstructor.SetSolution($"Day{dayI}", input);
-
+        Code._2020.Solution solution = SolutionConstructor.SetSolution($"Day{day}", input);
         try { part1 = solution.GetPart1(); } catch (Exception e) { part1 = e.ToString(); } // run async?
-        try { part2 = solution.GetPart2(); } catch (Exception e) { part2 = e.ToString(); } // run async?
+        try { part2 = solution.GetPart2(); } catch (Exception e) { part2 = e.ToString(); } 
     }
 
     private void ShowInput()
@@ -161,21 +164,6 @@ using Blazor_AoC.Code;
     {
         showInput = false;
         showCode = true;
-    }
-
-    private string GetAttribute(System.Type t)
-    {
-        System.Attribute[] attrs = System.Attribute.GetCustomAttributes(t);
-        foreach(System.Attribute attr in attrs)
-        {
-            if(attr is PuzzleAttribute)
-            {
-                PuzzleAttribute n = (PuzzleAttribute)attr;
-                return $"Day {n.dayid} - {n.title}";
-            }
-        }
-
-        return "";
     }
 
 #line default

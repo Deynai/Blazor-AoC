@@ -3,7 +3,7 @@
 
 <div class="section">
     <div class="container">
-        <h3>2020</h3>
+        <h3>@Year</h3>
     </div>
 
     <div class="container">
@@ -27,7 +27,7 @@
                 <tbody>
                     @foreach (dayInfo day in days)
                     {
-                        <DaySummaryComponent dayI="@day"></DaySummaryComponent>
+                        <DaySummaryComponent dayinfo="@day"></DaySummaryComponent>
                     }
                 </tbody>
             }
@@ -36,10 +36,12 @@
 </div>
 
     @code {
+        private int Year = 2020;
+
         public dayInfo[] days;
 
         protected override async Task OnInitializedAsync()
         {
-            days = await Http.GetFromJsonAsync<dayInfo[]>("sample-data/dayinfo.json");
+            days = await Http.GetFromJsonAsync<dayInfo[]>($"sample-data/dayinfo{Year}.json");
         }
     }

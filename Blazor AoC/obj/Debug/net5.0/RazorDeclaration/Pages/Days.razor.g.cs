@@ -114,11 +114,13 @@ using Blazor_AoC.Code;
 #nullable restore
 #line 38 "C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\Pages\Days.razor"
            
+        private int Year = 2020;
+
         public dayInfo[] days;
 
         protected override async Task OnInitializedAsync()
         {
-            days = await Http.GetFromJsonAsync<dayInfo[]>("sample-data/dayinfo.json");
+            days = await Http.GetFromJsonAsync<dayInfo[]>($"sample-data/dayinfo{Year}.json");
         }
     
 

@@ -114,11 +114,11 @@ using Blazor_AoC.Code;
 #line 9 "C:\Users\rowan\Source\Repos\Blazor AoC\Blazor-AoC\Blazor AoC\Controls\DaySummaryComponent.razor"
        
     [Parameter]
-    public dayInfo dayI { get; set; }
+    public dayInfo dayinfo { get; set; }
 
     private void SelectDay()
     {
-        NavigationManager.NavigateTo("days/" + dayI.Day.ToString());
+        NavigationManager.NavigateTo(dayinfo.Year + "/" + dayinfo.Day);
         // open page with the corresponding number
     }
 

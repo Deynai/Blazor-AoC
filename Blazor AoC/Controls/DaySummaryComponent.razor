@@ -1,18 +1,18 @@
 ﻿@inject NavigationManager NavigationManager
 
-<tr class="asd" @onclick="SelectDay">
-    <td><b>Day @dayI.Day</b></td>
-    <td><b>@dayI.Title</b></td>
-    <td><b>@dayI.Summary</b></td>
+<tr class="day-table-entry" @onclick="SelectDay">
+    <td><b>Day @dayinfo.Day</b></td>
+    <td><b>@dayinfo.Title</b></td>
+    <td><b>@dayinfo.Summary</b></td>
 </tr>
 
 @code {
     [Parameter]
-    public dayInfo dayI { get; set; }
+    public dayInfo dayinfo { get; set; }
 
     private void SelectDay()
     {
-        NavigationManager.NavigateTo("days/" + dayI.Day.ToString());
+        NavigationManager.NavigateTo(dayinfo.Year + "/" + dayinfo.Day);
         // open page with the corresponding number
     }
 }

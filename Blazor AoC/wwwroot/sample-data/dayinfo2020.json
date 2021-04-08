@@ -1,48 +1,56 @@
 [
   {
+    "Year": 2020,
     "Day": 1,
     "Title": "Report Repair",
     "Summary": "Find pairs of two and three numbers from a given list that sum to 2020"
   },
   {
+    "Year": 2020,
     "Day": 2,
     "Title": "Password Philosophy",
     "Summary": "Find how many passwords are valid according to certain rules on the characters"
   },
   {
+    "Year": 2020,
     "Day": 3,
     "Title": "Toboggan Trajectory",
     "Summary": "Find the number of collisions with trees in a forest while moving in a straight line"
   },
   {
+    "Year": 2020,
     "Day": 4,
     "Title": "Passport Processing",
     "Summary": "Find how many passports are valid according to certain field requirements"
   },
   {
+    "Year": 2020,
     "Day": 5,
     "Title": "Binary Boarding",
     "Summary": "Sort through aeroplane boarding passes and find your seat number"
   },
   {
+    "Year": 2020,
     "Day": 6,
     "Title": "Custom Customs",
-    "Summary": "Find the union and intersection of sets of customs declaration form responses"
+    "Summary": "Find the union and intersection of sets of customs declaration forms"
   },
   {
+    "Year": 2020,
     "Day": 7,
     "Title": "Handy Haversacks",
     "Summary": "Bags containing other bags. How many contain a shiny gold bag and what's inside?"
   },
   {
+    "Year": 2020,
     "Day": 8,
     "Title": "Handheld Halting",
     "Summary": "Debugging faulty machine code instructions for a console boot program"
   },
   {
+    "Year": 2020,
     "Day": 9,
     "Title": "Encoding Error",
     "Summary": "Finding contigious sums in an outdated \"XMAS\" cypher"
   }
-
 ]

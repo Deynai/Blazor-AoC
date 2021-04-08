@@ -51,6 +51,11 @@
 }
 
 @media (min-width: 641px) {
+
+    .top-row.pl-4.navbar.navbar-dark[b-icx9apfy2w] {
+        display: none;
+    }
+
     .navbar-toggler[b-icx9apfy2w] {
         display: none;
     }

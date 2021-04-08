@@ -1,17 +1,17 @@
 ﻿
-
-::deep .asd:nth-child(odd) {
+::deep .day-table-entry:nth-child(odd) {
     background-color: #585858;
 }
 
-::deep .asd:nth-child(even) {
+::deep .day-table-entry:nth-child(even) {
     background-color: #4a4a4a;
 }
 
-::deep .asd:hover {
+::deep .day-table-entry:hover {
     /*background-color: #aa5f03;*/
     outline-style: solid;
     outline-color: #fca840;
     outline-width: 2px;
-    outline-offset: -2px
+    outline-offset: -2px;
+    cursor: pointer
 }

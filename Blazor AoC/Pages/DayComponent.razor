@@ -1,12 +1,21 @@
-﻿@page "/Days/{dayI:int}"
+﻿@page "/{year:int}/{day:int}"
 @inject HttpClient Http
 @inject IJSRuntime _jsRuntime 
 
 <div class="section">
     <div class="container">
-        <h3>@title</h3>
+        @if (dayinfo == null)
+        {
+            <h3 style="color: #0D0D0D">.</h3>
+            <h6 style="color: #0D0D0D">.</h6>
+        }
+        else
+        {
+            <h3>Day @(dayinfo.Day) - @(dayinfo.Title)</h3>
+            <h6>@(dayinfo.Summary+"  ")<a target="_blank" href="@($"https://adventofcode.com/{dayinfo.Year}/day/{dayinfo.Day}")">AoC Link</a></h6>
+        }
     </div>
-
+    
     <div class="container">
         <hr />
 
@@ -47,7 +56,6 @@
     {
         <div class="container">
             <div>
-                @*<textarea class="textarea" rows="30">@codeBlock</textarea>*@
                 <pre><code class="language-csharp">@codeBlock</code></pre>
             </div>
         </div>
@@ -67,9 +75,10 @@
 
 @code {
     [Parameter]
-    public int dayI { get; set; }
+    public int day { get; set; }
 
-    private string title;
+    [Parameter]
+    public int year { get; set; }
 
     private string input { get; set; }
     private string part1 { get; set; }
@@ -82,12 +91,15 @@
 
     Code._2020.Solution solution;
 
+    private dayInfo[] days { get; set; }
+    private dayInfo dayinfo { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
-        codeBlock = await Http.GetStringAsync("Code/2020/Day" + dayI.ToString("D2") + "/Day" + dayI + ".txt");
-        input = await Http.GetStringAsync("Code/2020/Day" + dayI.ToString("D2") + "/day" + dayI + "input.txt");
-        solution = SolutionConstructor.SetSolution("Day" + dayI, input);
-        title = GetAttribute(solution.GetType());
+        days = await Http.GetFromJsonAsync<dayInfo[]>($"sample-data/dayinfo{year}.json");
+        dayinfo = days.Where(p => p.Day.Equals(day)).First();
+        codeBlock = await Http.GetStringAsync("Code/2020/Day" + day.ToString("D2") + "/Day" + day + ".txt");
+        input = await Http.GetStringAsync("Code/2020/Day" + day.ToString("D2") + "/day" + day + "input.txt");
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -97,10 +109,9 @@
 
     private void RunCode()
     {
-        Code._2020.Solution solution = SolutionConstructor.SetSolution($"Day{dayI}", input);
-
+        Code._2020.Solution solution = SolutionConstructor.SetSolution($"Day{day}", input);
         try { part1 = solution.GetPart1(); } catch (Exception e) { part1 = e.ToString(); } // run async?
-        try { part2 = solution.GetPart2(); } catch (Exception e) { part2 = e.ToString(); } // run async?
+        try { part2 = solution.GetPart2(); } catch (Exception e) { part2 = e.ToString(); } 
     }
 
     private void ShowInput()
@@ -113,20 +124,5 @@
     {
         showInput = false;
         showCode = true;
-    }
-
-    private string GetAttribute(System.Type t)
-    {
-        System.Attribute[] attrs = System.Attribute.GetCustomAttributes(t);
-        foreach(System.Attribute attr in attrs)
-        {
-            if(attr is PuzzleAttribute)
-            {
-                PuzzleAttribute n = (PuzzleAttribute)attr;
-                return $"Day {n.dayid} - {n.title}";
-            }
-        }
-
-        return "";
     }
 }
