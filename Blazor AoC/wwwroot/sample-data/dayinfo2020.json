@@ -52,5 +52,17 @@
     "Day": 9,
     "Title": "Encoding Error",
     "Summary": "Finding contigious sums in an outdated \"XMAS\" cypher"
+  },
+  {
+    "Year": 2020,
+    "Day": 10,
+    "Title": "Adapter Array",
+    "Summary": "Connect a chain of power adaptors with increasing joltage ratings"
+  },
+  {
+    "Year": 2020,
+    "Day": 11,
+    "Title": "Seating System",
+    "Summary": "How many seats in the waiting room end up being occupied?"
   }
 ]

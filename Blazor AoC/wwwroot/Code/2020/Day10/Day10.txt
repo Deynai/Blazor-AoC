@@ -5,71 +5,86 @@ using System.Threading.Tasks;
 
 namespace Blazor_AoC.Code._2020
 {
-    public class Day1 : Solution
+    [Puzzle(10, "Adapter Array")]
+    public class Day10 : Solution
     {
-        string inputString = string.Empty;
-        int[] input;
+        private string inputString = string.Empty;
+        List<int> jolts;
 
-        public Day1(string inputBox)
+        Dictionary<int, int> permsMemo = new Dictionary<int, int>();
+
+        public Day10(string inputBox)
         {
             inputString = inputBox;
+            ParseInput();
         }
 
         public override string GetPart1()
         {
-            input = inputString.Split('\n').Select(str => int.Parse(str)).OrderBy(x => x).ToArray();
+            int[] differences = new int[] { 0, 0, 0, 0 };
+            for(int i = 0; i < jolts.Count-1; i++)
+            {
+                differences[jolts[i + 1] - jolts[i]]++;
+            }
 
-            (int, int) pair = FindPair(input, 2020);
-            return (pair.Item1 * pair.Item2).ToString();
+            return (differences[1] * differences[3]).ToString();
         }
 
         public override string GetPart2()
         {
-            for(int i = 0; i < input.Length; i++)
+            // Since no 2-gaps exist, the set of adaptors can be broken into individual sets separated by 3-gaps
+            // e.g (1,1,1,1) -> 3 -> (1,1,1) -> 3 -> 3 -> (1,1,1,1,1), etc
+            // then the total number of valid permutations is equal to the product of valid permutations of each set of 1-gaps
+            
+            List<int> sets = new List<int>();
+            int count = 0;
+            for(int i = 0; i < jolts.Count-1; i++)
             {
-                (int, int) pair = FindPair(input, 2020 - input[i], i);
-                if (!pair.Item1.Equals(-1))
+                if((jolts[i+1] - jolts[i]).Equals(1))
                 {
-                    return (pair.Item1 * pair.Item2 * input[i]).ToString();
+                    count++;
+                }
+                else if(!count.Equals(0))
+                {
+                    sets.Add(count);
+                    count = 0;
                 }
             }
 
-            return "Error";
+            // but how many permutations are valid in a set of N 1-gaps?
+            // inductively, P(N) = P(N-1) + P(N-2) + P(N-3) for N > 3, and P(1) = 1, P(2) = 2, P(3) = 4.
+
+            permsMemo.Add(1, 1); permsMemo.Add(2, 2); permsMemo.Add(3, 4);
+
+            long total_permutations = 1;
+            foreach(int set_count in sets)
+            {
+                total_permutations *= FindPerms(set_count);
+            }
+
+            return total_permutations.ToString();
         }
 
-        public (int, int) FindPair(int[] input, int target, int exception = -1)
+        private int FindPerms(int n)
         {
-            int lower = 0;
-            int upper = input.Length - 1;
+            if (permsMemo.ContainsKey(n)) { return permsMemo[n]; }
 
-            while (!upper.Equals(lower))
-            {
-                int val = input[lower] + input[upper];
+            int val = (FindPerms(n - 1) + FindPerms(n - 2) + FindPerms(n - 3));
+            permsMemo.Add(n, val);
+            return val;
+        }
 
-                if (val.Equals(target))
-                {
-                    return (input[lower], input[upper]);
-                }
+        private void ParseInput()
+        {
+            jolts = inputString.Replace("\r", "")
+                                 .Split("\n")
+                                 .Select(line => int.Parse(line))
+                                 .OrderBy(x => x)
+                                 .ToList();
 
-                if (val < target)
-                {
-                    lower++;
-                    if (lower.Equals(exception))
-                    {
-                        lower++;
-                    }
-                }
-                else
-                {
-                    upper--;
-                    if (upper.Equals(exception))
-                    {
-                        upper--;
-                    }
-                }
-            }
-
-            return (-1, -1);
+            // add the wall socket and device as 0 and max+3
+            jolts.Insert(0, 0);
+            jolts.Add(jolts.Last()+3);
         }
     }
 }
