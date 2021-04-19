@@ -64,5 +64,17 @@
     "Day": 11,
     "Title": "Seating System",
     "Summary": "How many seats in the waiting room end up being occupied?"
+  },
+  {
+    "Year": 2020,
+    "Day": 12,
+    "Title": "Rain Risk",
+    "Summary": "What is the ships final position after following the navigation instructions?"
+  },
+  {
+    "Year": 2020,
+    "Day": 13,
+    "Title": "Shuttle Search",
+    "Summary": "Find the earliest departure patterns according to the bus schedule"
   }
 ]

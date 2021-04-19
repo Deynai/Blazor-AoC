@@ -5,71 +5,122 @@ using System.Threading.Tasks;
 
 namespace Blazor_AoC.Code._2020
 {
-    public class Day1 : Solution
+    [Puzzle(12, "Rain Risk")]
+    public class Day12 : Solution
     {
-        string inputString = string.Empty;
-        int[] input;
+        private string inputString = string.Empty;
 
-        public Day1(string inputBox)
+        private List<string> instructions;
+        (int x, int y)[] deltas = { (0, 1), (1, 0), (0, -1), (-1, 0) };
+        (int x, int y) pos = (0, 0);
+        (int x, int y) wp = (10, 1);
+        int facing = 1; // (N = 0, E = 1, S = 2, W = 3)
+
+        public Day12(string inputBox)
         {
             inputString = inputBox;
+            ParseInput();
         }
 
         public override string GetPart1()
         {
-            input = inputString.Split('\n').Select(str => int.Parse(str)).OrderBy(x => x).ToArray();
+            foreach(string line in instructions)
+            {
+                RunOperation1(line);
+            }
 
-            (int, int) pair = FindPair(input, 2020);
-            return (pair.Item1 * pair.Item2).ToString();
+            return (Math.Abs(pos.x) + Math.Abs(pos.y)).ToString();
         }
 
         public override string GetPart2()
         {
-            for(int i = 0; i < input.Length; i++)
+            pos = (0, 0);
+
+            foreach (string line in instructions)
             {
-                (int, int) pair = FindPair(input, 2020 - input[i], i);
-                if (!pair.Item1.Equals(-1))
-                {
-                    return (pair.Item1 * pair.Item2 * input[i]).ToString();
-                }
+                RunOperation2(line);
             }
 
-            return "Error";
+            return (Math.Abs(pos.x) + Math.Abs(pos.y)).ToString();
         }
 
-        public (int, int) FindPair(int[] input, int target, int exception = -1)
+        private void RunOperation1(string line)
         {
-            int lower = 0;
-            int upper = input.Length - 1;
+            int val = int.Parse(line.Substring(1));
 
-            while (!upper.Equals(lower))
+            switch (line[0])
             {
-                int val = input[lower] + input[upper];
-
-                if (val.Equals(target))
-                {
-                    return (input[lower], input[upper]);
-                }
-
-                if (val < target)
-                {
-                    lower++;
-                    if (lower.Equals(exception))
-                    {
-                        lower++;
-                    }
-                }
-                else
-                {
-                    upper--;
-                    if (upper.Equals(exception))
-                    {
-                        upper--;
-                    }
-                }
+                case 'N': pos.y += val;
+                    break;
+                case 'S': pos.y -= val;
+                    break;
+                case 'E': pos.x += val;
+                    break;
+                case 'W': pos.x -= val;
+                    break;
+                case 'L': facing = (4 + facing - (val / 90)) % 4;
+                    break;
+                case 'R': facing = (facing + (val / 90)) % 4;
+                    break;
+                case 'F': pos.x += deltas[facing].x * val;
+                          pos.y += deltas[facing].y * val;
+                    break;
+                default:
+                    break;
             }
+        }
 
-            return (-1, -1);
+        private void RunOperation2(string line)
+        {
+            int val = int.Parse(line.Substring(1));
+
+            switch (line[0])
+            {
+                case 'N':
+                    wp.y += val;
+                    break;
+                case 'S':
+                    wp.y -= val;
+                    break;
+                case 'E':
+                    wp.x += val;
+                    break;
+                case 'W':
+                    wp.x -= val;
+                    break;
+                case 'L':
+                    RotateWP(4 - val / 90);
+                    break;
+                case 'R':
+                    RotateWP(val / 90);
+                    break;
+                case 'F':
+                    pos.x += wp.x * val;
+                    pos.y += wp.y * val;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void RotateWP(int val)
+        {
+            switch (val)
+            {
+                case 1: wp = (wp.y, -wp.x);
+                    break;
+                case 2: wp = (-wp.x, -wp.y);
+                    break;
+                case 3: wp = (-wp.y, wp.x);
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void ParseInput()
+        {
+            instructions = inputString.Replace("\r", "").Split("\n").ToList();            
         }
     }
 }
