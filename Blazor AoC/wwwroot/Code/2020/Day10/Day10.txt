@@ -9,9 +9,9 @@ namespace Blazor_AoC.Code._2020
     public class Day10 : Solution
     {
         private string inputString = string.Empty;
-        List<int> jolts;
+        private List<int> jolts;
 
-        Dictionary<int, int> permsMemo = new Dictionary<int, int>();
+        private Dictionary<int, int> permsMemo = new Dictionary<int, int>();
 
         public Day10(string inputBox)
         {

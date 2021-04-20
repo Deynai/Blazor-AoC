@@ -10,8 +10,8 @@ namespace Blazor_AoC.Code._2020
     {
         private string inputString = string.Empty;
 
-        List<(string op, int val)> input_instructions;
-        Dictionary<int, (string op, int val)> visited_part1 = new Dictionary<int, (string, int)>(); // this will store lines visited in part 1
+        private List<(string op, int val)> input_instructions;
+        private Dictionary<int, (string op, int val)> visited_part1 = new Dictionary<int, (string, int)>(); // this will store lines visited in part 1
 
         public Day8(string inputBox)
         {

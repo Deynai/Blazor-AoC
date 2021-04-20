@@ -9,9 +9,9 @@ namespace Blazor_AoC.Code._2020
     public class Day11 : Solution
     {
         private string inputString = string.Empty;
-        Seat[][] seat_grid;
-        List<Seat> seats_list;
-        (int, int)[] dirs = { (1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (-1, 1), (1, -1), (-1, -1) };
+        private Seat[][] seat_grid;
+        private List<Seat> seats_list;
+        private (int, int)[] dirs = { (1, 0), (-1, 0), (0, 1), (0, -1), (1, 1), (-1, 1), (1, -1), (-1, -1) };
 
         private class Seat
         {

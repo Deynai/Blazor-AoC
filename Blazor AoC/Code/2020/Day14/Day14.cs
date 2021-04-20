@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 
 namespace Blazor_AoC.Code._2020
 {
-    [Puzzle(14, "")]
+    [Puzzle(14, "Docking Data")]
     public class Day14 : Solution
     {
         private string inputString = string.Empty;
+        private List<string> input;
 
         public Day14(string inputBox)
         {
@@ -23,6 +24,11 @@ namespace Blazor_AoC.Code._2020
         public override string GetPart2()
         {
             return base.GetPart2();
+        }
+
+        private void ParseInput()
+        {
+
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Blazor_AoC.Code._2020
     public class Day1 : Solution
     {
         string inputString = string.Empty;
-        int[] input;
+        private int[] input;
 
         public Day1(string inputBox)
         {

@@ -8,9 +8,9 @@ namespace Blazor_AoC.Code._2020
     [Puzzle(2, "Password Philosophy")]
     public class Day2 : Solution
     {
-        string inputString = string.Empty;
-        string[] parsedInput;
-        string[] delims = { "-", " ", ": " };
+        private string inputString = string.Empty;
+        private string[] parsedInput;
+        private string[] delims = { "-", " ", ": " };
 
         public Day2(string inputBox)
         {

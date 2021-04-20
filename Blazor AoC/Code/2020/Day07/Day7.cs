@@ -10,11 +10,11 @@ namespace Blazor_AoC.Code._2020
     public class Day7 : Solution
     {
         private string inputString = string.Empty;
-        Dictionary<string, List<(string bag, int amount)>> bagsGraph;
+        private Dictionary<string, List<(string bag, int amount)>> bagsGraph;
 
         // Memoisation dicts to cut down on recursion steps
-        Dictionary<string, bool> containsMemo = new Dictionary<string, bool>();
-        Dictionary<string, int> childMemo = new Dictionary<string, int>();
+        private Dictionary<string, bool> containsMemo = new Dictionary<string, bool>();
+        private Dictionary<string, int> childMemo = new Dictionary<string, int>();
 
         public Day7(string inputBox)
         {

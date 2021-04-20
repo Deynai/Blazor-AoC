@@ -76,5 +76,12 @@
     "Day": 13,
     "Title": "Shuttle Search",
     "Summary": "Find the earliest departure patterns according to the bus schedule"
+  },
+  {
+    "Year": 2020,
+    "Day": 14,
+    "Title": "Docking Data",
+    "Summary": "Write to memory after applying a special kind of bitmask"
   }
+
 ]

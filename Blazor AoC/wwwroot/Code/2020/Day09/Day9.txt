@@ -9,9 +9,9 @@ namespace Blazor_AoC.Code._2020
     public class Day9 : Solution
     {
         private string inputString = string.Empty;
-        List<long> input;
+        private List<long> input;
 
-        long part1number;
+        private long part1number;
 
         public Day9(string inputBox)
         {

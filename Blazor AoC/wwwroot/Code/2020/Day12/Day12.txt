@@ -11,10 +11,10 @@ namespace Blazor_AoC.Code._2020
         private string inputString = string.Empty;
 
         private List<string> instructions;
-        (int x, int y)[] deltas = { (0, 1), (1, 0), (0, -1), (-1, 0) };
-        (int x, int y) pos = (0, 0);
-        (int x, int y) wp = (10, 1);
-        int facing = 1; // (N = 0, E = 1, S = 2, W = 3)
+        private (int x, int y)[] deltas = { (0, 1), (1, 0), (0, -1), (-1, 0) };
+        private (int x, int y) pos = (0, 0);
+        private (int x, int y) wp = (10, 1);
+        private int facing = 1; // (N = 0, E = 1, S = 2, W = 3)
 
         public Day12(string inputBox)
         {

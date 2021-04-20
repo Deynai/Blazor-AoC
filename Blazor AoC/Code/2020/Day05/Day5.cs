@@ -9,7 +9,7 @@ namespace Blazor_AoC.Code._2020
     public class Day5 : Solution
     {
         private string inputString = string.Empty;
-        List<int> passes;
+        private List<int> passes;
 
         public Day5(string inputBox)
         {

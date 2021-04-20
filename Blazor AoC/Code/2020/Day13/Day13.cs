@@ -11,8 +11,8 @@ namespace Blazor_AoC.Code._2020
     {
         private string inputString = string.Empty;
 
-        int earliest_departure;
-        List<int> busSchedule;
+        private int earliest_departure;
+        private List<int> busSchedule;
 
         public Day13(string inputBox)
         {
