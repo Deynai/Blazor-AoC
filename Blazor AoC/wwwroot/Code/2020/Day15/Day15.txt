@@ -5,71 +5,55 @@ using System.Threading.Tasks;
 
 namespace Blazor_AoC.Code._2020
 {
-    public class Day1 : Solution
+    [Puzzle(15, "Rambunctious Recitation")]
+    public class Day15 : Solution
     {
-        string inputString = string.Empty;
-        int[] input;
+        private string inputString = string.Empty;
+        private uint[] history = new uint[30_000_000];
+        private uint count = 1;
+        private uint num;
 
-        public Day1(string inputBox)
+        public Day15(string inputBox)
         {
             inputString = inputBox;
         }
 
         public override string GetPart1()
         {
-            input = inputString.Split('\n').Select(str => int.Parse(str)).OrderBy(x => x).ToArray();
+            uint[] start_sequence = inputString.Split(",").Select(n => uint.Parse(n)).ToArray();
+            num = start_sequence.Last();
 
-            (int, int) pair = FindPair(input, 2020);
-            return (pair.Item1 * pair.Item2).ToString();
+            for(int i = 0; i < start_sequence.Length-1; i++)
+            {
+                history[start_sequence[i]] = count;
+                count++;
+            }
+
+            while(count < 2020)
+            {
+                GetNextTerm();
+                count++;
+            }
+
+            return num.ToString();
         }
 
         public override string GetPart2()
         {
-            for(int i = 0; i < input.Length; i++)
+            while(count < 30_000_000)
             {
-                (int, int) pair = FindPair(input, 2020 - input[i], i);
-                if (!pair.Item1.Equals(-1))
-                {
-                    return (pair.Item1 * pair.Item2 * input[i]).ToString();
-                }
+                GetNextTerm();
+                count++;
             }
 
-            return "Error";
+            return num.ToString();
         }
 
-        public (int, int) FindPair(int[] input, int target, int exception = -1)
+        private void GetNextTerm()
         {
-            int lower = 0;
-            int upper = input.Length - 1;
-
-            while (!upper.Equals(lower))
-            {
-                int val = input[lower] + input[upper];
-
-                if (val.Equals(target))
-                {
-                    return (input[lower], input[upper]);
-                }
-
-                if (val < target)
-                {
-                    lower++;
-                    if (lower.Equals(exception))
-                    {
-                        lower++;
-                    }
-                }
-                else
-                {
-                    upper--;
-                    if (upper.Equals(exception))
-                    {
-                        upper--;
-                    }
-                }
-            }
-
-            return (-1, -1);
+            uint next = history[num].Equals(0) ? 0 : count - history[num];
+            history[num] = count;
+            num = next;
         }
     }
 }

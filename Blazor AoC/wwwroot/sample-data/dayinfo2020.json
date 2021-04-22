@@ -82,6 +82,12 @@
     "Day": 14,
     "Title": "Docking Data",
     "Summary": "Write to memory after applying a special kind of bitmask"
+  },
+  {
+    "Year": 2020,
+    "Day": 15,
+    "Title": "Rambunctious Recitation",
+    "Summary": "What's the 30,000,000th number in this special \"Van Eck\" sequence?"
   }
 
 ]
