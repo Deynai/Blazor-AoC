@@ -81,7 +81,7 @@
     "Year": 2020,
     "Day": 14,
     "Title": "Docking Data",
-    "Summary": "Write to memory after applying a special kind of bitmask"
+    "Summary": "Write values to memory addresses after applying a strange kind of bitmask"
   },
   {
     "Year": 2020,
