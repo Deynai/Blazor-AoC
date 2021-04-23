@@ -88,6 +88,12 @@
     "Day": 15,
     "Title": "Rambunctious Recitation",
     "Summary": "What's the 30,000,000th number in this special \"Van Eck\" sequence?"
+  },
+  {
+    "Year": 2020,
+    "Day": 16,
+    "Title": "Ticket Translation",
+    "Summary": "Find out which train tickets are invalid and deduce which ticket fields are which"
   }
 
 ]

@@ -2,74 +2,129 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Blazor_AoC.Code._2020
 {
-    public class Day1 : Solution
+    [Puzzle(16, "Ticket Translation")]
+    public class Day16 : Solution
     {
-        string inputString = string.Empty;
-        int[] input;
+        private string inputString = string.Empty;
 
-        public Day1(string inputBox)
+        private List<(string name, int[] value)> criteria = new List<(string, int[])>();
+        private List<int[]> tickets; // where [0] is our ticket
+        private List<int[]> validTickets; // "
+
+        public Day16(string inputBox)
         {
             inputString = inputBox;
+            ParseInput();
         }
 
         public override string GetPart1()
         {
-            input = inputString.Split('\n').Select(str => int.Parse(str)).OrderBy(x => x).ToArray();
+            // This is dubious as it's possible for gaps in the middle that would require more complex bounds
+            // However, inspecting the default input shows that the ranges overlap and merge into a single lower and upper bound
+            (int min, int max) bound = (
+                                       min: criteria.Aggregate((min, b) => b.value[0] < min.value[0] ? b : min).value[0],
+                                       max: criteria.Aggregate((max, b) => b.value[3] > max.value[3] ? b : max).value[3]
+                                       );
 
-            (int, int) pair = FindPair(input, 2020);
-            return (pair.Item1 * pair.Item2).ToString();
+            int sum = 0;
+            // We'll need the valid tickets for part 2
+            validTickets = tickets.Where(t =>
+                                    {
+                                        foreach (int n in t)
+                                        {
+                                            if (n < bound.min || n > bound.max)
+                                            {
+                                                sum += n;
+                                                return false;
+                                            }
+                                        }
+                                        return true;
+                                    })
+                                    .ToList();
+
+            return sum.ToString();
         }
 
         public override string GetPart2()
         {
-            for(int i = 0; i < input.Length; i++)
+            (string name, List<int> cols)[] valid_columns = new (string name, List<int>)[20];
+
+            // For each criteria create a list containing the column indices that are viable
+            valid_columns = criteria.Select(c =>
+                                        {
+                                            List<int> newlist = new List<int>();
+                                            for (int i = 0; i < tickets[0].Length; i++)
+                                            {
+                                                if (validTickets.Select(array => array[i])
+                                                           .All(val => isValidBounds(val, c.value)))
+                                                {
+                                                    newlist.Add(i);
+                                                }
+                                            }
+                                            return (c.name, newlist);
+                                        }).ToArray();
+
+            // Find a criteria with only one possible column and remove that as a possibility from the others
+            // If there isn't a unique solution then this doesn't work. Luckily our default input provides a unique solution
+            int while_break = 0;
+            while (!valid_columns.All(c => c.cols.Count.Equals(1)))
             {
-                (int, int) pair = FindPair(input, 2020 - input[i], i);
-                if (!pair.Item1.Equals(-1))
-                {
-                    return (pair.Item1 * pair.Item2 * input[i]).ToString();
-                }
+                List<int> index_to_remove = valid_columns.Where(c => c.cols.Count.Equals(1))
+                                                         .Select(n => n.cols.First()).ToList();
+
+                valid_columns = valid_columns.Select(list => { 
+                                                            if (!list.cols.Count.Equals(1)) 
+                                                            { 
+                                                                foreach(int n in index_to_remove)
+                                                                {
+                                                                    list.cols.Remove(n);
+                                                                }
+                                                            } 
+                                                            return list; 
+                                                        }).ToArray();
+
+                while_break++;
+                if (while_break > 50) { break; }
             }
 
-            return "Error";
+            // We now have a unique mapping from criteria to column and need only find the departure columns
+            long product = valid_columns.Where(n => n.name.Substring(0, 3)
+                                        .Equals("dep"))
+                                        .Select(v => v.cols.First())
+                                        .Aggregate(1L, (prod, x) => prod * validTickets[0][x]);
+
+            return product.ToString();
         }
 
-        public (int, int) FindPair(int[] input, int target, int exception = -1)
+        private bool isValidBounds(int num, int[] bounds)
         {
-            int lower = 0;
-            int upper = input.Length - 1;
+            return ((num >= bounds[0] && num <= bounds[1]) || (num >= bounds[2] && num <= bounds[3]));
+        }
 
-            while (!upper.Equals(lower))
-            {
-                int val = input[lower] + input[upper];
+        private void ParseInput()
+        {
+            Regex reg_digit = new Regex(@"\d+");
 
-                if (val.Equals(target))
-                {
-                    return (input[lower], input[upper]);
-                }
+            List<List<string>> inputList = inputString.Replace("\r", "").Split("\n\n").Select(block => block.Split("\n").ToList()).ToList();
 
-                if (val < target)
-                {
-                    lower++;
-                    if (lower.Equals(exception))
-                    {
-                        lower++;
-                    }
-                }
-                else
-                {
-                    upper--;
-                    if (upper.Equals(exception))
-                    {
-                        upper--;
-                    }
-                }
-            }
+            criteria = inputList[0].Select(line => (
+                                           name: line.Substring(0, line.IndexOf(':')),
+                                           value: reg_digit.Matches(line).Select(m => int.Parse(m.Value)).ToArray()
+                                           )
+                                   ).ToList();
 
-            return (-1, -1);
+            tickets = inputList[2].Skip(1)
+                                  .Select(line => line.Split(',')
+                                                      .Select(n => int.Parse(n))
+                                                      .ToArray())
+                                  .ToList();
+
+            // add our ticket to the start
+            tickets.Insert(0, inputList[1].Last().Split(',').Select(n => int.Parse(n)).ToArray());
         }
     }
 }
