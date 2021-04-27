@@ -94,6 +94,11 @@
     "Day": 16,
     "Title": "Ticket Translation",
     "Summary": "Find out which train tickets are invalid and deduce which ticket fields are which"
+  },
+  {
+    "Year": 2020,
+    "Day": 17,
+    "Title": "Conway Cubes",
+    "Summary": "Conway's Game of Life in three and four dimensions"
   }
-
 ]
