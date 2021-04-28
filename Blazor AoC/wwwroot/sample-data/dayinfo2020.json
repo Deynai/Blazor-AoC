@@ -100,5 +100,11 @@
     "Day": 17,
     "Title": "Conway Cubes",
     "Summary": "Conway's Game of Life in three and four dimensions"
+  },
+  {
+    "Year": 2020,
+    "Day": 18,
+    "Title": "Operation Order",
+    "Summary": "Parse arithmetic expressions with different orders of operations"
   }
 ]

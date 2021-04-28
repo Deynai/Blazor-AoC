@@ -10,12 +10,16 @@ namespace Blazor_AoC.Code._2020
     {
         private string inputString = string.Empty;
 
+        // We're going to keep a hashset of positions that are "active".
+        // Each step, we iterate through the hashset of active positions and store adjacent positions in a new dictionary along with a counter
+        // Then we go through every position in the dictionary and construct a new hashset of active cubes based on the game of life rules
+
         // Let's stick to 4 dimensions here
         HashSet<(int x, int y, int z, int w)> active_cubes;
         Dictionary<(int, int, int, int), int> position_values = new Dictionary<(int, int, int, int), int>();
 
         public Day17(string inputBox)
-        {
+        { 
             inputString = inputBox;
         }
 
@@ -79,12 +83,13 @@ namespace Blazor_AoC.Code._2020
         private void SetAdjacentCountsPart1()
         {
             position_values.Clear();
+            int[] delta = new int[3] { -1, 0, 1 };
 
-            for(int i = -1; i < 2; i++)
+            foreach (int i in delta)
             {
-                for (int j = -1; j < 2; j++)
+                foreach (int j in delta)
                 {
-                    for (int k = -1; k < 2; k++)
+                    foreach (int k in delta)
                     {
                         if ((i, j, k).Equals((0, 0, 0))){ continue; }
                         foreach ((int x, int y, int z, int w) pos in active_cubes)
@@ -109,14 +114,15 @@ namespace Blazor_AoC.Code._2020
         private void SetAdjacentCountsPart2()
         {
             position_values.Clear();
+            int[] delta = new int[3] { -1, 0, 1 };
 
-            for (int i = -1; i < 2; i++)
+            foreach(int i in delta)
             {
-                for (int j = -1; j < 2; j++)
+                foreach (int j in delta)
                 {
-                    for (int k = -1; k < 2; k++)
+                    foreach (int k in delta)
                     {
-                        for (int l = -1; l < 2; l++)
+                        foreach (int l in delta)
                         {
                             if ((i, j, k, l).Equals((0, 0, 0, 0))) { continue; }
                             foreach ((int x, int y, int z, int w) pos in active_cubes)
