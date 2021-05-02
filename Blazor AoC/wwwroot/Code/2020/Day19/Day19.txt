@@ -2,74 +2,98 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Data;
+using System.Text.RegularExpressions;
 
 namespace Blazor_AoC.Code._2020
 {
-    public class Day1 : Solution
+    [Puzzle(19, "Monster Messages")]
+    public class Day19 : Solution
     {
-        string inputString = string.Empty;
-        int[] input;
+        private string inputString = string.Empty;
+       
+        private Dictionary<string, string[]> grammar;
+        private HashSet<string> messages;
 
-        public Day1(string inputBox)
+        public Day19(string inputBox)
         {
             inputString = inputBox;
+            ParseInput();
         }
-
+        
         public override string GetPart1()
         {
-            input = inputString.Split('\n').Select(str => int.Parse(str)).OrderBy(x => x).ToArray();
-
-            (int, int) pair = FindPair(input, 2020);
-            return (pair.Item1 * pair.Item2).ToString();
+            Regex reg_parser = new Regex(BuildRegexString());
+            return CountValidMessages(reg_parser).ToString();
         }
 
         public override string GetPart2()
         {
-            for(int i = 0; i < input.Length; i++)
-            {
-                (int, int) pair = FindPair(input, 2020 - input[i], i);
-                if (!pair.Item1.Equals(-1))
-                {
-                    return (pair.Item1 * pair.Item2 * input[i]).ToString();
-                }
-            }
-
-            return "Error";
+            // Obviously a huge fudge but perhaps what the puzzle had been intending with the sentence:
+            // "Remember, you only need to handle the rules you have"
+            // The Earley Parser for general case took significantly longer to compute, and .NET doesn't seem to support recursive regex anyway
+            grammar["8"] = new string[]{ "42", "42 42", "42 42 42", "42 42 42 42", "42 42 42 42 42", "42 42 42 42 42 42" };
+            grammar["11"] = new string[]{ "42 31", "42 42 31 31", "42 42 42 31 31 31", "42 42 42 42 31 31 31 31", "42 42 42 42 42 31 31 31 31 31" };
+            Regex reg_parser = new Regex(BuildRegexString());
+            return CountValidMessages(reg_parser).ToString();
         }
 
-        public (int, int) FindPair(int[] input, int target, int exception = -1)
+        private int CountValidMessages(Regex reg_parser)
         {
-            int lower = 0;
-            int upper = input.Length - 1;
-
-            while (!upper.Equals(lower))
+            int count = 0;
+            foreach (string message in messages)
             {
-                int val = input[lower] + input[upper];
-
-                if (val.Equals(target))
+                if (reg_parser.Match(message).Success)
                 {
-                    return (input[lower], input[upper]);
-                }
-
-                if (val < target)
-                {
-                    lower++;
-                    if (lower.Equals(exception))
-                    {
-                        lower++;
-                    }
-                }
-                else
-                {
-                    upper--;
-                    if (upper.Equals(exception))
-                    {
-                        upper--;
-                    }
+                    count++;
                 }
             }
+            return count;
+        }
 
-            return (-1, -1);
+        private string BuildRegexString()
+        {
+            Regex reg_number = new Regex(@"(?<n>\d+)");
+            string regex_parser = "^";
+            
+            foreach(string s in grammar["0"])
+            {
+                regex_parser += s;
+            }
+
+            Match number_match = reg_number.Match(regex_parser);
+            while(number_match.Success)
+            {
+                regex_parser = reg_number.Replace(regex_parser, (n) => GetRegexStringForRule(n.Value));
+                number_match = reg_number.Match(regex_parser);
+            }
+
+            return regex_parser.Replace(" ", "") + "$";
+        }
+
+        private string GetRegexStringForRule(string rule)
+        {
+            string new_reg_rule = "(?:";
+            foreach(string s in grammar[rule])
+            {
+                new_reg_rule += s + "|";
+            }
+            return new_reg_rule.Trim('|') + ")";
+        }
+
+        private void ParseInput()
+        {
+            messages = inputString.Replace("\r", "").Split("\n\n")[1].Split("\n").ToHashSet();
+
+            grammar = inputString.Replace("\r", "").Split("\n\n")[0].Split("\n")
+                                    .Select(line =>
+                                    {
+                                        // we're going to format, i.e: "4: 3 8 21 | 17 5" into ("4", {"3 8 21", "17 5"}), a (string, string[]) tuple
+                                        string[] subrules = line.Substring(line.IndexOf(":") + 1).Replace("\"", "").Split("|").Select(l => l.Trim()).ToArray();
+
+                                        return (id: line.Substring(0, line.IndexOf(":")), subrules: subrules);
+                                    })
+                                    .ToDictionary(l => l.id, l => l.subrules);
         }
     }
 }

@@ -106,5 +106,11 @@
     "Day": 18,
     "Title": "Operation Order",
     "Summary": "Parse arithmetic expressions with different orders of operations"
+  },
+  {
+    "Year": 2020,
+    "Day": 19,
+    "Title": "Monster Messages",
+    "Summary": "Which messages are valid according to these nested grammar rules?"
   }
 ]

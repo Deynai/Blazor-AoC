@@ -153,7 +153,7 @@ namespace Blazor_AoC.Code._2020
 
         private void ParseInput()
         {
-            expressions = inputString.Replace("\r", "").Replace(" ", "").Split("\n");
+            expressions = inputString.Trim().Replace("\r", "").Replace(" ", "").Split("\n");
         }
     }
 }
