@@ -105,7 +105,7 @@
     "Year": 2020,
     "Day": 18,
     "Title": "Operation Order",
-    "Summary": "Parse arithmetic expressions with different orders of operations"
+    "Summary": "Parse arithmetic expressions with unconventional orders of operations"
   },
   {
     "Year": 2020,
@@ -117,12 +117,24 @@
     "Year": 2020,
     "Day": 20,
     "Title": "Jurassic Jigsaw",
-    "Summary": "Construct a Jigsaw out of the pieces and find the sea monsters"
+    "Summary": "Construct the Jigsaw out of the pieces and find the sea monsters"
   },
   {
     "Year": 2020,
     "Day": 21,
     "Title": "Allergen Assessment",
     "Summary": "Deduce which ingredient contains each allergen"
+  },
+  {
+    "Year": 2020,
+    "Day": 22,
+    "Title": "Crab Combat",
+    "Summary": "You play a game of cards with recursive rules against a crab, who wins?"
+  },
+  {
+    "Year": 2020,
+    "Day": 23,
+    "Title": "Crab Cups",
+    "Summary": "The crab has his own game of permuting a lot of cups, what order are they in?"
   }
 ]
