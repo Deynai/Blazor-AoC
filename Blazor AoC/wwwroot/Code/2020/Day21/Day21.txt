@@ -2,74 +2,95 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace Blazor_AoC.Code._2020
 {
-    public class Day1 : Solution
+    [Puzzle(21, "Allergen Assessment")]
+    public class Day21 : Solution
     {
-        string inputString = string.Empty;
-        int[] input;
+        private string inputString = string.Empty;
 
-        public Day1(string inputBox)
+        List<(string[] Allergen, string[] Ingredients)> input;
+        List<(string Allergen, List<string> Ingredients)> ing_intersect;
+
+        public Day21(string inputBox)
         {
             inputString = inputBox;
+            ParseInput();
         }
 
         public override string GetPart1()
         {
-            input = inputString.Split('\n').Select(str => int.Parse(str)).OrderBy(x => x).ToArray();
+            // Most of this question is in the parsing of input
+            // We're going to reverse the allergen association, i,e if food A contains (x,y), then rewrite as: x in A ingredients, y in A ingredients
+            
+            ing_intersect = input.SelectMany(i => i.Allergen.Select(A => (A, Ingredients: i.Ingredients)))
+                                 .GroupBy(name => name.A)
+                                 // we then intersect all the lists of ingredients that each allergen x is in
+                                 // arriving at a small set of candidate allergen ingredients
+                                 .Select(group => (
+                                                    Allergen: group.Key,
+                                                    Ingredients: group.Select(p => p.Ingredients)
+                                                                      .Skip(1)
+                                                                      .Aggregate(new List<string>(group.Select(q => q.Ingredients).First()),
+                                                                                (h, e) => h.Intersect(e).ToList())
+                                                   )
+                                        )
+                                 .OrderBy(allergen_ingredient => allergen_ingredient.Ingredients.Count())
+                                 .ToList();
 
-            (int, int) pair = FindPair(input, 2020);
-            return (pair.Item1 * pair.Item2).ToString();
+            // take all the ingredients, and select/count only the ingredients which don't appear in our candidate allergen ingredients
+            int clean = input.SelectMany(food => food.Ingredients)
+                             .Where(ing => !ing_intersect.SelectMany(candidate => candidate.Ingredients).Contains(ing))
+                             .Count();
+
+            return clean.ToString();
         }
 
         public override string GetPart2()
         {
-            for(int i = 0; i < input.Length; i++)
+            // now we need to cross compare each set of candidates to reduce further
+            // continue reducing until a one-to-one map "single" from each allergen to ingredient exists
+            // for a unique solution this should reduce nicely
+            int singles = 0;
+            int bp = 0;
+            while (!singles.Equals(8))
             {
-                (int, int) pair = FindPair(input, 2020 - input[i], i);
-                if (!pair.Item1.Equals(-1))
+                singles = 0;
+                for (int i = 0; i < ing_intersect.Count; i++)
                 {
-                    return (pair.Item1 * pair.Item2 * input[i]).ToString();
+                    if (ing_intersect[i].Ingredients.Count.Equals(1))
+                    {
+                        singles++;
+                        for (int j = 0; j < ing_intersect.Count; j++)
+                        {
+                            if (!i.Equals(j))
+                            {
+                                // i.e, if [i] is one ingredient, we know that's the i allergen and j cannot be that, so remove it from [j]'s
+                                ing_intersect[j] = (ing_intersect[j].Allergen, ing_intersect[j].Ingredients.Except(ing_intersect[i].Ingredients).ToList());
+                            }
+                        }
+                    }
                 }
+                bp++;
+                if(bp > 50) { throw new Exception("Error in GetPart2: Candidate ingredients are not reducing to singles"); }
             }
 
-            return "Error";
+            List<string> allergen_ingredients = ing_intersect.OrderBy(A => A.Allergen).Select(I => I.Ingredients.First()).ToList();
+            return string.Join(",", allergen_ingredients);
         }
 
-        public (int, int) FindPair(int[] input, int target, int exception = -1)
+        private void ParseInput()
         {
-            int lower = 0;
-            int upper = input.Length - 1;
-
-            while (!upper.Equals(lower))
-            {
-                int val = input[lower] + input[upper];
-
-                if (val.Equals(target))
-                {
-                    return (input[lower], input[upper]);
-                }
-
-                if (val < target)
-                {
-                    lower++;
-                    if (lower.Equals(exception))
-                    {
-                        lower++;
-                    }
-                }
-                else
-                {
-                    upper--;
-                    if (upper.Equals(exception))
-                    {
-                        upper--;
-                    }
-                }
-            }
-
-            return (-1, -1);
+            input = Regex.Replace(inputString, @"\r|\(|\)", "")
+                         .Split("\n")
+                         .Select(line => line.Split(" contains "))
+                         .Select(g => (
+                         Allergen: g[1].Split(", "),
+                         Ingredients: g[0].Split(" ")
+                         ))
+                         .ToList();
         }
     }
 }
