@@ -112,5 +112,17 @@
     "Day": 19,
     "Title": "Monster Messages",
     "Summary": "Which messages are valid according to these nested grammar rules?"
+  },
+  {
+    "Year": 2020,
+    "Day": 20,
+    "Title": "Jurassic Jigsaw",
+    "Summary": "Construct a Jigsaw out of the pieces and find the sea monsters"
+  },
+  {
+    "Year": 2020,
+    "Day": 21,
+    "Title": "Allergen Assessment",
+    "Summary": "Deduce which ingredient contains each allergen"
   }
 ]

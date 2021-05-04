@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Blazor_AoC.Code._2020
 {
-    [Puzzle(21, "")]
+    [Puzzle(21, "Allergen Assessment")]
     public class Day21 : Solution
     {
         private string inputString = string.Empty;
