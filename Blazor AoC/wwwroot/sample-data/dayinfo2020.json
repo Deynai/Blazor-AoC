@@ -135,12 +135,18 @@
     "Year": 2020,
     "Day": 23,
     "Title": "Crab Cups",
-    "Summary": "The crab has his own game of permuting a lot of cups, what order are they in?"
+    "Summary": "The crab has his own game of permuting (a lot of) cups. What order are they in?"
   },
   {
     "Year": 2020,
     "Day": 24,
     "Title": "Lobby Layout",
-    "Summary": "Conway's Game of Life with hexagonal tiles"
+    "Summary": "How many tiles are active in this cellular autonoma on a hexagonal grid?"
+  },
+  {
+    "Year": 2020,
+    "Day": 25,
+    "Title": "Combo Breaker",
+    "Summary": "Two public keys and a cryptographic handshake. Can it be cracked?"
   }
 ]

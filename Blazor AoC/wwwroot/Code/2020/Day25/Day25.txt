@@ -2,74 +2,57 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Numerics;
 
 namespace Blazor_AoC.Code._2020
 {
-    public class Day1 : Solution
+    [Puzzle(25, "Combo Breaker")]
+    public class Day25 : Solution
     {
-        string inputString = string.Empty;
-        int[] input;
+        private string inputString = string.Empty;
 
-        public Day1(string inputBox)
+        int pkey1;
+        int pkey2;
+
+        public Day25(string inputBox)
         {
             inputString = inputBox;
+            ParseInput();
         }
 
         public override string GetPart1()
         {
-            input = inputString.Split('\n').Select(str => int.Parse(str)).OrderBy(x => x).ToArray();
+            int modulo = 20201227;
+            int value = 1;
+            int subject_number = 7;
+            int loop_count = pkey1 > pkey2 ? pkey1 : pkey2;
 
-            (int, int) pair = FindPair(input, 2020);
-            return (pair.Item1 * pair.Item2).ToString();
+            for(int i = 1; i < loop_count; i++)
+            {
+                value = (value * subject_number) % modulo;
+
+                // if value is one of our keys, we have found the loop size for one of them
+                if (value.Equals(pkey1) || value.Equals(pkey2))
+                {
+                    // transform loop size using the other public key to find the encryption key
+                    int encryption_key = value.Equals(pkey1) ? (int)BigInteger.ModPow(pkey2, i, modulo) : (int)BigInteger.ModPow(pkey1, i, modulo);
+                    return encryption_key.ToString();
+                }
+            }
+
+            return "No Encryption Key found";
         }
 
         public override string GetPart2()
         {
-            for(int i = 0; i < input.Length; i++)
-            {
-                (int, int) pair = FindPair(input, 2020 - input[i], i);
-                if (!pair.Item1.Equals(-1))
-                {
-                    return (pair.Item1 * pair.Item2 * input[i]).ToString();
-                }
-            }
-
-            return "Error";
+            return "⭐";
         }
 
-        public (int, int) FindPair(int[] input, int target, int exception = -1)
+        private void ParseInput()
         {
-            int lower = 0;
-            int upper = input.Length - 1;
-
-            while (!upper.Equals(lower))
-            {
-                int val = input[lower] + input[upper];
-
-                if (val.Equals(target))
-                {
-                    return (input[lower], input[upper]);
-                }
-
-                if (val < target)
-                {
-                    lower++;
-                    if (lower.Equals(exception))
-                    {
-                        lower++;
-                    }
-                }
-                else
-                {
-                    upper--;
-                    if (upper.Equals(exception))
-                    {
-                        upper--;
-                    }
-                }
-            }
-
-            return (-1, -1);
+            var nums = inputString.Replace("\r", "").Trim().Split("\n").Select(n => int.Parse(n)).ToArray();
+            pkey1 = nums[0];
+            pkey2 = nums[1];
         }
     }
 }
