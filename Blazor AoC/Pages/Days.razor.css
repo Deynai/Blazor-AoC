@@ -9,9 +9,14 @@
 
 ::deep .day-table-entry:hover {
     /*background-color: #aa5f03;*/
-    outline-style: solid;
-    outline-color: #fca840;
-    outline-width: 2px;
-    outline-offset: -2px;
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: #5a127a;
     cursor: pointer
+}
+
+::deep .day-table-entry {
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
 }

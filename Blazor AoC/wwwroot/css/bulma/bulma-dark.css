@@ -215,7 +215,7 @@ button, input, select, textarea {
 
 html {
     box-sizing: border-box;
-    background-color: #000;
+    background-color: #0d0d0d;
     font-size: 16px;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
@@ -4034,7 +4034,7 @@ a.tag:hover {
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #4b4b4b;
 }
 
 /* Handle */
@@ -4044,7 +4044,8 @@ a.tag:hover {
 
     /* Handle on hover */
     ::-webkit-scrollbar-thumb:hover {
-        background: #555;
+        background: #888;
+        cursor: default;
     }
 
 .input, .select select, .textarea {
@@ -4071,7 +4072,7 @@ a.tag:hover {
     }
 
     .input:active, .input:focus, .is-active.input, .is-active.textarea, .is-focused.input, .is-focused.textarea, .select select.is-active, .select select.is-focused, .select select:active, .select select:focus, .textarea:active, .textarea:focus {
-        border-color: #fca840;
+        border-color: #5a127a;
         box-shadow: 0 0 0 .125em rgba(50,115,226,.25)
     }
 
@@ -7244,8 +7245,8 @@ a.panel-block, label.panel-block {
         .tabs li.is-active a {
             border-bottom-width: 3px;
             border-bottom-style: solid;
-            border-bottom-color: #fca840;
-            color: #fca840
+            border-bottom-color: #5a127a;
+            color: #5a127a
         }
 
         .tabs li a {

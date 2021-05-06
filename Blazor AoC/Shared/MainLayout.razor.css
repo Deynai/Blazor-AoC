@@ -10,9 +10,9 @@
 }
 
 .sidebar {
-    background-image: linear-gradient( 180deg, #0D0D0D 10%, #382b1c 120%);
-    border-color: #ff9611;
-    border-style: double;
+    background: linear-gradient(107deg, rgb(20 0 39 / 80%), rgb(13 13 13 / 80%) 70.71%), linear-gradient(70deg, rgb(162 5 75), rgb(60 15 99 / 22%) 40.71%);
+    border-color: #6f6f6f33;
+    border-style: ridge;
     border-width: 0px;
     border-right-width: 4px;
 }
