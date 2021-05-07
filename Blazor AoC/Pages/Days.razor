@@ -2,37 +2,33 @@
 @inject HttpClient Http
 
 <div class="section">
-    <div class="container">
-        <h3>@Year</h3>
-    </div>
+    <h3>@Year</h3>
 
-    <div class="container">
-        <hr />
+    <hr />
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Day</th>
-                    <th>Title</th>
-                    <th>Summary</th>
-                </tr>
-            </thead>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Title</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
 
-            @if (days == null)
-            {
-                <p><em>Loading...</em></p>
-            }
-            else
-            {
-                <tbody>
-                    @foreach (dayInfo day in days)
-                    {
-                        <DaySummaryComponent dayinfo="@day"></DaySummaryComponent>
-                    }
-                </tbody>
-            }
-        </table>
-    </div>
+        @if (days == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <tbody>
+                @foreach (dayInfo day in days)
+                {
+                    <DaySummaryComponent dayinfo="@day"></DaySummaryComponent>
+                }
+            </tbody>
+        }
+    </table>
 </div>
 
     @code {

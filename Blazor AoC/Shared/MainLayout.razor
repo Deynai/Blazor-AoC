@@ -5,14 +5,15 @@
         <NavMenu />
     </div>
 
-    <div class="main">
+    @*min-width here to allow code block to be scaled properly with window size*@
+    <div class="main" style="min-width: 0;">
         
        @*
         <div class="top-row px-4">
            @*<a href="https://blazor.net" target="_blank" class="ml-md-auto">About</a>
         </div>
         *@
-        <div class="content px-4">
+        <div class="content px-4" style="display: flex; flex-direction: column; height: 100%">
             @Body
         </div>
     </div>

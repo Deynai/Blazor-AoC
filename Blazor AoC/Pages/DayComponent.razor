@@ -1,24 +1,21 @@
 ﻿@page "/{year:int}/{day:int}"
 @inject HttpClient Http
-@inject IJSRuntime _jsRuntime 
+@inject IJSRuntime _jsRuntime
 
-<div class="section">
-    <div class="container">
-        @if (dayinfo == null)
-        {
-            <h3 style="color: #0D0D0D">.</h3>
-            <h6 style="color: #0D0D0D">.</h6>
-        }
-        else
-        {
-            <h3>Day @(dayinfo.Day) - @(dayinfo.Title)</h3>
-            <h6>@(dayinfo.Summary+"  ")<a target="_blank" href="@($"https://adventofcode.com/{dayinfo.Year}/day/{dayinfo.Day}")">AoC Link</a></h6>
-        }
-    </div>
-    
-    <div class="container">
-        <hr />
+<div class="section no-bottom-padding">
+    @if (dayinfo == null)
+    {
+        <h3 style="color: #0D0D0D">.</h3>
+        <h6 style="color: #0D0D0D">.</h6>
+    }
+    else
+    {
+        <h3>Day @(dayinfo.Day) - @(dayinfo.Title)</h3>
+        <h6>@(dayinfo.Summary+"  ")<a target="_blank" href="@($"https://adventofcode.com/{dayinfo.Year}/day/{dayinfo.Day}")">AoC Link</a></h6>
+    }
+    <hr />
 
+    <div class="level-left">
         <nav class="level">
             <div class="level-left">
                 <div class="level-item">
@@ -39,35 +36,31 @@
             </div>
         </nav>
     </div>
-    <div class="container">
-        <div class="tabs is-fullwidth">
-            <ul>
-                <li class="@((showInput) ? "is-active" : "")">
-                    <a @onclick="ShowInput"><b>Input</b></a>
-                </li>
-                <li class="@((showCode) ? "is-active" : "")">
-                    <a @onclick="ShowCode"><b>Code</b></a>
-                </li>
-            </ul>
-        </div>
-    </div>
+</div>
 
+<div class="section no-top-padding no-bottom-padding">
+    <div class="tabs is-fullwidth">
+        <ul>
+            <li class="@((showInput) ? "is-active" : "")">
+                <a @onclick="ShowInput"><b>Input</b></a>
+            </li>
+            <li class="@((showCode) ? "is-active" : "")">
+                <a @onclick="ShowCode"><b>Code</b></a>
+            </li>
+        </ul>
+    </div>
+    
+</div>
+
+<div class="section no-bottom-padding no-top-padding flex-grow-1">
     @if (showCode)
     {
-        <div class="container">
-            <div>
-                <pre><code class="language-csharp">@codeBlock</code></pre>
-            </div>
-        </div>
+        <pre class="pre-text"><code class="language-csharp">@codeBlock</code></pre>
     }
 
     @if (showInput)
     {
-        <div class="container">
-            <div>
-                <textarea style="font-family: Courier New, Courier, monospace" spellcheck="false" class="textarea inputarea" rows="30" @bind="input"></textarea>
-            </div>
-        </div>
+        <textarea class="textarea inputarea" spellcheck="false" @bind="input"></textarea>
     }
 </div>
 
@@ -109,7 +102,7 @@
     {
         Code._2020.Solution solution = SolutionConstructor.SetSolution($"Day{day}", input);
         try { part1 = solution.GetPart1(); } catch (Exception e) { part1 = e.ToString(); } // run async?
-        try { part2 = solution.GetPart2(); } catch (Exception e) { part2 = e.ToString(); } 
+        try { part2 = solution.GetPart2(); } catch (Exception e) { part2 = e.ToString(); }
     }
 
     private void ShowInput()
