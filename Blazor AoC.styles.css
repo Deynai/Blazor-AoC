@@ -1,0 +1,190 @@
+/* /Pages/DayComponent.razor.rz.scp.css */
+.inputarea[b-4zf3m302w4] {
+    border-radius: 0px;
+    resize: none;
+    cursor: auto;
+    font-family: Courier New, Courier, monospace;
+    max-height: 80%;
+    min-height: 16em;
+    height: 80%;
+}
+
+.pre-text[b-4zf3m302w4]{
+    min-width: 0;
+    overflow: auto;
+}
+
+.no-top-padding[b-4zf3m302w4]{
+    padding-top: 0;
+}
+
+.no-bottom-padding[b-4zf3m302w4]{
+    padding-bottom: 0;
+}
+/* /Pages/Days.razor.rz.scp.css */
+
+[b-cnwnk54xuz] .day-table-entry:nth-child(odd) {
+    background-color: #585858;
+}
+
+[b-cnwnk54xuz] .day-table-entry:nth-child(even) {
+    background-color: #4a4a4a;
+}
+
+[b-cnwnk54xuz] .day-table-entry:hover {
+    /*background-color: #aa5f03;*/
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: #5a127a;
+    cursor: pointer
+}
+
+[b-cnwnk54xuz] .day-table-entry {
+    border-bottom-width: 2px;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+}
+/* /Shared/MainLayout.razor.rz.scp.css */
+.page[b-fi1tdc8siy] {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.main[b-fi1tdc8siy] {
+    flex: 1;
+    background-color: #0D0D0D;
+}
+
+.sidebar[b-fi1tdc8siy] {
+    background: linear-gradient(107deg, rgb(20 0 39 / 80%), rgb(13 13 13 / 80%) 70.71%), linear-gradient(70deg, rgb(162 5 75), rgb(60 15 99 / 22%) 40.71%);
+    border-color: #6f6f6f33;
+    border-style: ridge;
+    border-width: 0px;
+    border-right-width: 4px;
+}
+
+.top-row[b-fi1tdc8siy] {
+    background-color: #f7f7f7;
+    border-bottom: 1px solid #d6d5d5;
+    justify-content: flex-end;
+    height: 3.5rem;
+    display: flex;
+    align-items: center;
+}
+
+    .top-row[b-fi1tdc8siy]  a, .top-row .btn-link[b-fi1tdc8siy] {
+        white-space: nowrap;
+        margin-left: 1.5rem;
+    }
+
+    .top-row a:first-child[b-fi1tdc8siy] {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+@media (max-width: 640.98px) {
+    .top-row:not(.auth)[b-fi1tdc8siy] {
+        display: none;
+    }
+
+    .top-row.auth[b-fi1tdc8siy] {
+        justify-content: space-between;
+    }
+
+    .top-row a[b-fi1tdc8siy], .top-row .btn-link[b-fi1tdc8siy] {
+        margin-left: 0;
+    }
+}
+
+@media (min-width: 641px) {
+    .page[b-fi1tdc8siy] {
+        flex-direction: row;
+    }
+
+    .sidebar[b-fi1tdc8siy] {
+        min-width: 200px;
+        height: 100vh;
+        position: sticky;
+        top: 0;
+    }
+
+    .top-row[b-fi1tdc8siy] {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
+
+    .main > div[b-fi1tdc8siy] {
+        padding-left: 2rem !important;
+        padding-right: 1.5rem !important;
+    }
+}
+/* /Shared/NavMenu.razor.rz.scp.css */
+.navbar-toggler[b-4jfk3gw6fv] {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.top-row[b-4jfk3gw6fv] {
+    height: 3.5rem;
+    background-color: rgba(0,0,0,0.4);
+}
+
+.navbar-brand[b-4jfk3gw6fv] {
+    font-size: 1.1rem;
+}
+
+.oi[b-4jfk3gw6fv] {
+    width: 2rem;
+    font-size: 1.1rem;
+    vertical-align: text-top;
+    top: -2px;
+}
+
+.nav-item[b-4jfk3gw6fv] {
+    font-size: 0.9rem;
+    padding-bottom: 0.5rem;
+}
+
+    .nav-item:first-of-type[b-4jfk3gw6fv] {
+        padding-top: 1rem;
+    }
+
+    .nav-item:last-of-type[b-4jfk3gw6fv] {
+        padding-bottom: 1rem;
+    }
+
+    .nav-item[b-4jfk3gw6fv]  a {
+        color: #d7d7d7;
+        border-radius: 4px;
+        height: 3rem;
+        display: flex;
+        align-items: center;
+        line-height: 3rem;
+    }
+
+.nav-item[b-4jfk3gw6fv]  a.active {
+    background-color: rgba(255,255,255,0.25);
+    color: white;
+}
+
+.nav-item[b-4jfk3gw6fv]  a:hover {
+    background-color: rgba(255,255,255,0.1);
+    color: white;
+}
+
+@media (min-width: 641px) {
+
+    .top-row.pl-4.navbar.navbar-dark[b-4jfk3gw6fv] {
+        display: none;
+    }
+
+    .navbar-toggler[b-4jfk3gw6fv] {
+        display: none;
+    }
+
+    .collapse[b-4jfk3gw6fv] {
+        /* Never collapse the sidebar for wide screens */
+        display: block;
+    }
+}
