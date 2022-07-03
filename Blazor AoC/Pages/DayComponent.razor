@@ -1,6 +1,12 @@
 ﻿@page "/{year:int}/{day:int}"
+
+@using System.Threading
+@using System.Diagnostics
+
 @inject HttpClient Http
 @inject IJSRuntime _jsRuntime
+
+@implements IDisposable
 
 <div class="section no-bottom-padding">
     @if (dayinfo == null)
@@ -34,7 +40,7 @@
                     <b>Part 1:</b>
                 </div>
                 <div class="level-item">
-                    <input class="input" readonly @bind="part1" />
+                    <input class="input" readonly @bind="part1">@part1</input>
                 </div>
                 <div class="level-item">
                     <b>Part 2:</b>
@@ -96,7 +102,8 @@
     private bool showInput = true;
 
     bool isStopwatch = false;
-    System.Diagnostics.Stopwatch sw;
+    private Stopwatch sw;
+    private CancellationTokenSource cts;
 
     //private Code._2020.Solution solution;
 
@@ -107,8 +114,8 @@
     {
         days = await Http.GetFromJsonAsync<dayInfo[]>($"sample-data/dayinfo{year}.json");
         dayinfo = days.Where(p => p.Day.Equals(day)).First();
-        codeBlock = await Http.GetStringAsync("Code/2020/Day" + day.ToString("D2") + "/Day" + day + ".txt");
-        input = await Http.GetStringAsync("Code/2020/Day" + day.ToString("D2") + "/day" + day + "input.txt");
+        codeBlock = await Http.GetStringAsync($"Code/{year}/Day" + day.ToString("D2") + "/Day" + day + ".txt");
+        input = await Http.GetStringAsync($"Code/{year}/Day" + day.ToString("D2") + "/day" + day + "input.txt");
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -119,16 +126,45 @@
     bool isWorking = false;
     private async void RunCode()
     {
-        isWorking = true;
-        await Task.Delay(1);
+        cts = new CancellationTokenSource();
+        var token = cts.Token;
+
+        await ClearValues(token);
         sw = System.Diagnostics.Stopwatch.StartNew();
-        isStopwatch = true;
         Code._2020.Solution solution = SolutionConstructor.SetSolution($"Day{day}", input);
-        try { part1 = solution.GetPart1(); } catch (Exception e) { part1 = e.ToString(); } // run async?
-        try { part2 = solution.GetPart2(); } catch (Exception e) { part2 = e.ToString(); }
+
+        // Part 1
+        try { 
+            part1 = await solution.GetPart1(token);
+        } catch (Exception e) { 
+            if (e is not System.Threading.Tasks.TaskCanceledException)
+                part1 = e.ToString(); 
+        }
+
+        StateHasChanged();
+        await Task.Delay(1);
+
+        // Part 2
+        try { 
+            part2 = await solution.GetPart2(token);
+        } catch (Exception e) { 
+            if (e is not System.Threading.Tasks.TaskCanceledException)
+                part2 = e.ToString(); 
+        }
+
         sw.Stop();
+        isStopwatch = true;
         isWorking = false;
         StateHasChanged();
+    }
+
+    private async Task ClearValues(CancellationToken cancellationToken)
+    {
+        isStopwatch = false;
+        isWorking = true;
+        part1 = "";
+        part2 = "";
+        await Task.Delay(1);
     }
 
     private void ShowInput()
@@ -141,5 +177,15 @@
     {
         showInput = false;
         showCode = true;
+    }
+
+    private void Cancel()
+    {
+        cts?.Cancel(false);
+    }
+
+    public void Dispose()
+    {
+        Cancel();
     }
 }

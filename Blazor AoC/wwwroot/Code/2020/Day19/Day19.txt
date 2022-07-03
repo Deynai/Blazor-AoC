@@ -21,13 +21,13 @@ namespace Blazor_AoC.Code._2020
             ParseInput();
         }
         
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             Regex reg_parser = new Regex(BuildRegexString());
             return CountValidMessages(reg_parser).ToString();
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             // Obviously a huge fudge but perhaps what the puzzle had been intending with the sentence:
             // "Remember, you only need to handle the rules you have"

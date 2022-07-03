@@ -21,7 +21,7 @@ namespace Blazor_AoC.Code._2020
             ParseInput();
         }
 
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             // sum all of the steps to get the end point of each route
             var end_points = directions.Select(line => line.Aggregate((sum, dir) => (sum.Item1 + dir.Item1, sum.Item2 + dir.Item2))).ToArray();
@@ -43,7 +43,7 @@ namespace Blazor_AoC.Code._2020
             return black_tiles.Select(t => t.Value % 2).Aggregate((s, x) => s + x).ToString();
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             HashSet<(int x, int y)> active_tiles = black_tiles.Where(t => t.Value % 2 == 1).Select(k => k.Key).ToHashSet();
             Dictionary<(int x, int y), int> neighbours;

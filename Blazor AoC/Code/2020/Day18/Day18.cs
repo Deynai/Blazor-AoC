@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Blazor_AoC.Code._2020
 {
@@ -54,12 +55,12 @@ namespace Blazor_AoC.Code._2020
             ParseInput();
         }
 
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             return SumExpressions().ToString();
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             op_precedence["+"] = 2;
             return SumExpressions().ToString();

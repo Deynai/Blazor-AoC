@@ -20,7 +20,7 @@ namespace Blazor_AoC.Code._2020
             ParseInput();
         }
 
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             // Most of this question is in the parsing of input
             // We're going to reverse the allergen association, i,e if food A contains (x,y), then rewrite as: x in A ingredients, y in A ingredients
@@ -48,7 +48,7 @@ namespace Blazor_AoC.Code._2020
             return clean.ToString();
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             // now we need to cross compare each set of candidates to reduce further
             // continue reducing until a one-to-one map "single" from each allergen to ingredient exists

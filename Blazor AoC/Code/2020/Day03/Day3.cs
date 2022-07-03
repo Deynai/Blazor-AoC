@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Blazor_AoC.Code._2020
@@ -17,7 +18,7 @@ namespace Blazor_AoC.Code._2020
             inputString = inputBox;
         }
 
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             trees = inputString.Split('\n').Select(x => x.Trim().ToCharArray().Select(c => c.Equals('#') ? 1 : 0).ToArray()).ToArray();
 
@@ -25,7 +26,7 @@ namespace Blazor_AoC.Code._2020
             return part1.ToString();
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             return ((long)RideSled(1, 1) * part1 * RideSled(5, 1) * RideSled(7, 1) * RideSled(1, 2)).ToString();
         }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Data;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Blazor_AoC.Code._2020
 {
@@ -21,7 +22,7 @@ namespace Blazor_AoC.Code._2020
             ParseInput();
         }
         
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             // We're going to recursively build one big regex string with plenty of |'s for all the nested rules,
             // then let the hopefully well optimised regex parser handle matching each message
@@ -29,7 +30,7 @@ namespace Blazor_AoC.Code._2020
             return CountValidMessages(reg_parser).ToString();
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             // Obviously a huge fudge but perhaps what the puzzle had been intending with the sentence:
             // "Remember, you only need to handle the rules you have"

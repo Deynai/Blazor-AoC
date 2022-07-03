@@ -18,7 +18,7 @@ namespace Blazor_AoC.Code._2020
             inputString = inputBox;
         }
 
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             uint[] start_sequence = inputString.Split(",").Select(n => uint.Parse(n)).ToArray();
             num = start_sequence.Last();
@@ -38,7 +38,7 @@ namespace Blazor_AoC.Code._2020
             return num.ToString();
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             while(count < 30_000_000)
             {

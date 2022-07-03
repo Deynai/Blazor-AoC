@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Blazor_AoC.Code._2020
@@ -22,7 +23,7 @@ namespace Blazor_AoC.Code._2020
             ParseInput();
         }
 
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             foreach(string line in instructions)
             {
@@ -32,7 +33,7 @@ namespace Blazor_AoC.Code._2020
             return (Math.Abs(pos.x) + Math.Abs(pos.y)).ToString();
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             pos = (0, 0);
 

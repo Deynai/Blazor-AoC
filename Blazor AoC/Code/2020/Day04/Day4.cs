@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Blazor_AoC.Code._2020
 {
@@ -18,7 +19,7 @@ namespace Blazor_AoC.Code._2020
             inputString = inputBox.Replace("\r", string.Empty);
         }
 
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             ParseInput();
 
@@ -26,7 +27,7 @@ namespace Blazor_AoC.Code._2020
                             .Count.ToString();
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             Regex hcl_regex = new Regex("^#[0-9a-f]{6}$"); // # followed by exactly 6 of digits 0-9 and letters a-f
             Regex pid_regex = new Regex("^[0-9]{9}$"); // exactly 9 digits of 0-9

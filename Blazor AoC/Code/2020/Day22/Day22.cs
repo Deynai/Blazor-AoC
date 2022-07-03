@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Blazor_AoC.Code._2020
 {
@@ -19,7 +20,7 @@ namespace Blazor_AoC.Code._2020
             inputString = inputBox;
         }
 
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             ParseInput();
 
@@ -28,7 +29,7 @@ namespace Blazor_AoC.Code._2020
             return winner.Item2.ToString();
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             ParseInput();
 

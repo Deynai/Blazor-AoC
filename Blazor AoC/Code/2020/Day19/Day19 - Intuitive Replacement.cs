@@ -6,6 +6,7 @@ using System.Data;
 using System.Text.RegularExpressions;
 
 using System.Diagnostics;
+using System.Threading;
 
 namespace Blazor_AoC.Code._2020
 {
@@ -27,7 +28,7 @@ namespace Blazor_AoC.Code._2020
         }
 
         
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             int sum = 0;
             foreach(string message in messages)
@@ -37,7 +38,7 @@ namespace Blazor_AoC.Code._2020
             return sum.ToString();
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             string[][] rule1 = new string[2][]; rule1[0] = new string[] { "42" }; rule1[1] = new string[] { "42", "8" };
             string[][] rule2 = new string[2][]; rule2[0] = new string[] { "42", "31" }; rule2[1] = new string[] { "42", "11", "31" };

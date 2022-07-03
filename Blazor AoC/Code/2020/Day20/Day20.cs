@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Blazor_AoC.Code._2020
@@ -20,7 +21,7 @@ namespace Blazor_AoC.Code._2020
             ParseInput();
         }
 
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             // Quite ugly but we want to go through all tiles and add both the normal and reverse edge matches
             // take pairs of tiles
@@ -56,7 +57,7 @@ namespace Blazor_AoC.Code._2020
             return prod.ToString();
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             // construct all of the tiles in the right places with matched edges
             Tile[,] puzzle = ConstructPuzzle();

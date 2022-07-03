@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Data;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Blazor_AoC.Code._2020
 {
@@ -67,12 +68,7 @@ namespace Blazor_AoC.Code._2020
             ParseInput();
         }
 
-        public override string GetPart2()
-        {
-            return base.GetPart2();
-        }
-
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             int sum = 0;
             foreach (string message in messages)

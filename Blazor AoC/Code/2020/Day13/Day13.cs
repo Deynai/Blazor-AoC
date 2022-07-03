@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Numerics;
+using System.Threading;
 
 namespace Blazor_AoC.Code._2020
 {
@@ -20,7 +21,7 @@ namespace Blazor_AoC.Code._2020
             ParseInput();
         }
 
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             (int id, int wait) min = busSchedule.Where(bus_id => !bus_id.Equals(-1))
                                             .Select(id => (id, wait_time: id - (earliest_departure % id)))
@@ -29,7 +30,7 @@ namespace Blazor_AoC.Code._2020
             return (min.id * min.wait).ToString();
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             List<(int id, int index)> buses = new List<(int, int)>();
             for(int i = 0; i < busSchedule.Count; i++)

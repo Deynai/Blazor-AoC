@@ -21,7 +21,7 @@ namespace Blazor_AoC.Code._2020
             ParseInput();
         }
 
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             // This is dubious as it's possible for gaps in the middle that would require more complex bounds
             // However, inspecting the default input shows that the ranges overlap and merge into a single lower and upper bound
@@ -49,7 +49,7 @@ namespace Blazor_AoC.Code._2020
             return sum.ToString();
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             (string name, List<int> cols)[] valid_columns = new (string name, List<int>)[20];
 

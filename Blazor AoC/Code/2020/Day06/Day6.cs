@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Blazor_AoC.Code._2020
@@ -15,7 +16,7 @@ namespace Blazor_AoC.Code._2020
             inputString = inputBox.Replace("\r", string.Empty);
         }
 
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             return inputString.Split(new string[] { "\n\n" }, StringSplitOptions.None)
                             .Select(lines => lines.Replace("\n", string.Empty)
@@ -25,7 +26,7 @@ namespace Blazor_AoC.Code._2020
                             .ToString();
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             return inputString.Split(new string[] { "\n\n" }, StringSplitOptions.None)
                             .Select(lines => lines.Split(new string[] { "\n" }, StringSplitOptions.None))

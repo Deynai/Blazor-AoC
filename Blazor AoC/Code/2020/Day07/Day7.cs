@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Threading;
 
 namespace Blazor_AoC.Code._2020
 {
@@ -21,7 +22,7 @@ namespace Blazor_AoC.Code._2020
             inputString = inputBox.Replace("\r", string.Empty);
         }
 
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             ParseInput();
 
@@ -30,7 +31,7 @@ namespace Blazor_AoC.Code._2020
                                 .ToString();
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             return ChildAmount("shiny gold").ToString();
         }

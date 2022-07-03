@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Blazor_AoC.Code._2020
@@ -19,7 +20,7 @@ namespace Blazor_AoC.Code._2020
             ParseInput();
         }
 
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             for(int i = 25; i < input.Count; i++)
             {
@@ -37,7 +38,7 @@ namespace Blazor_AoC.Code._2020
             return "Not found";
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             (int index, int length) range = FindContiguous(part1number);
             long min = input.GetRange(range.index, range.length).Min();

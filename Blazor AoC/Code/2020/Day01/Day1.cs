@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Blazor_AoC.Code._2020
@@ -16,7 +17,7 @@ namespace Blazor_AoC.Code._2020
             inputString = inputBox;
         }
 
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             input = inputString.Split('\n').Select(str => int.Parse(str)).OrderBy(x => x).ToArray();
 
@@ -24,7 +25,7 @@ namespace Blazor_AoC.Code._2020
             return (pair.Item1 * pair.Item2).ToString();
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             for(int i = 0; i < input.Length; i++)
             {

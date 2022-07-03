@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Blazor_AoC.Code._2020
@@ -8,12 +9,12 @@ namespace Blazor_AoC.Code._2020
     // Base Class for AoC Solutions.
     public class Solution
     {
-        public virtual string GetPart1()
+        public virtual async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             return "Not Implemented";
         }
 
-        public virtual string GetPart2()
+        public virtual async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             return "Not Implemented";
         }

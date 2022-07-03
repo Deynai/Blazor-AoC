@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Blazor_AoC.Code._2020
@@ -17,7 +18,7 @@ namespace Blazor_AoC.Code._2020
             inputString = inputBox;
         }
 
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             parsedInput = inputString.Split('\n').ToArray();
 
@@ -34,7 +35,7 @@ namespace Blazor_AoC.Code._2020
             return valid_password_count.ToString();
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             int valid_password_count = 0;
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Blazor_AoC.Code._2020
@@ -8,51 +9,72 @@ namespace Blazor_AoC.Code._2020
     [Puzzle(15, "Rambunctious Recitation")]
     public class Day15 : Solution
     {
+        private readonly uint PART1_COUNT = 2020;
+        private readonly uint PART2_COUNT = 30_000_000;
+        private readonly uint PARTITION = 100_000;
+
         private string inputString = string.Empty;
-        private uint[] history = new uint[30_000_000];
+        private uint[] history;
         private uint count = 1;
         private uint num;
 
         public Day15(string inputBox)
         {
             inputString = inputBox;
+            history = new uint[PART2_COUNT];
         }
 
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             uint[] start_sequence = inputString.Split(",").Select(n => uint.Parse(n)).ToArray();
             num = start_sequence.Last();
 
-            for(int i = 0; i < start_sequence.Length-1; i++)
+            for (int i = 0; i < start_sequence.Length - 1; i++)
             {
                 history[start_sequence[i]] = count;
                 count++;
             }
 
-            while(count < 2020)
+            for (uint i = count; i < PART1_COUNT; i++)
             {
-                GetNextTerm();
-                count++;
+                GetNextTerm(i);
             }
+
+            count = PART1_COUNT;
 
             return num.ToString();
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
-            while(count < 30_000_000)
+            while (count < PART2_COUNT)
             {
-                GetNextTerm();
-                count++;
+                uint amountRemaining = PART2_COUNT - count;
+                uint nextBatchAmount = amountRemaining < PARTITION ? amountRemaining : PARTITION;
+                GetNextXTerms(count, nextBatchAmount);
+                count += nextBatchAmount;
+                await Task.Delay(1, cancellationToken);
             }
+
+            count = PART2_COUNT;
 
             return num.ToString();
         }
 
-        private void GetNextTerm()
+        private void GetNextXTerms(uint currCount, uint amount)
         {
-            uint next = history[num].Equals(0) ? 0 : count - history[num];
-            history[num] = count;
+            for (uint i = currCount; i < currCount + amount; i++)
+            {
+                uint next = history[num].Equals(0) ? 0 : i - history[num];
+                history[num] = i;
+                num = next;
+            }
+        }
+
+        private void GetNextTerm(uint currCount)
+        {
+            uint next = history[num].Equals(0) ? 0 : currCount - history[num];
+            history[num] = currCount;
             num = next;
         }
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Numerics;
+using System.Threading;
 
 namespace Blazor_AoC.Code._2020
 {
@@ -20,7 +21,7 @@ namespace Blazor_AoC.Code._2020
             ParseInput();
         }
 
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             int modulo = 20201227;
             int value = 1;
@@ -43,7 +44,7 @@ namespace Blazor_AoC.Code._2020
             return "No Encryption Key found";
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             return "⭐";
         }

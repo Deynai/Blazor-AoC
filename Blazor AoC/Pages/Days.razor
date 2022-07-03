@@ -1,8 +1,8 @@
-﻿@page "/2020"
+﻿@page "/{year:int}"
 @inject HttpClient Http
 
 <div class="section">
-    <h3>@Year</h3>
+    <h3>@year</h3>
 
     <hr />
 
@@ -32,12 +32,13 @@
 </div>
 
     @code {
-        private int Year = 2020;
+        [Parameter]
+        public int year { get; set; }
 
         public dayInfo[] days;
 
-        protected override async Task OnInitializedAsync()
+        protected override async Task OnParametersSetAsync()
         {
-            days = await Http.GetFromJsonAsync<dayInfo[]>($"sample-data/dayinfo{Year}.json");
+            days = await Http.GetFromJsonAsync<dayInfo[]>($"sample-data/dayinfo{year}.json");
         }
     }

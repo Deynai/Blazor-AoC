@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Blazor_AoC.Code._2020
@@ -22,7 +23,7 @@ namespace Blazor_AoC.Code._2020
             ParseInput();
         }
 
-        public override string GetPart1()
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
         {
             // Run the game with size of input and 100 moves
             RunGame(input.Length, 100);
@@ -37,7 +38,7 @@ namespace Blazor_AoC.Code._2020
             return string.Join("", order);
         }
 
-        public override string GetPart2()
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
         {
             // Run the game with size 1,000,000 and 10,000,000 moves
             RunGame(1_000_000, 10_000_000);
