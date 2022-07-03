@@ -8,6 +8,5 @@ namespace AoC.Tests.Shared
 {
     public static class TestUtil
     {
-        public const string TESTPATH = "C:\\Users\\rowan\\Source\\Repos\\Blazor-AoC\\Blazor-AoC\\AoC.Tests\\2016\\";
     }
 }
