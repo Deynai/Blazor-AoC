@@ -1,0 +1,44 @@
+﻿@page "/{year:int}"
+@inject HttpClient Http
+
+<div class="section">
+    <h3>@year</h3>
+
+    <hr />
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Day</th>
+                <th>Title</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+
+        @if (days == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <tbody>
+                @foreach (DayData day in days)
+                {
+                    <DaySummaryComponent dayinfo="@day"></DaySummaryComponent>
+                }
+            </tbody>
+        }
+    </table>
+</div>
+
+    @code {
+        [Parameter]
+        public int year { get; set; }
+
+        public DayData[] days;
+
+        protected override async Task OnParametersSetAsync()
+        {
+            days = await Http.GetFromJsonAsync<DayData[]>($"sample-data/dayinfo{year}.json");
+        }
+    }

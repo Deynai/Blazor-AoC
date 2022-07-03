@@ -1,0 +1,132 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using System.Threading;
+using AoC.Code.Solutions;
+
+namespace AoC.Code.Solutions._2020
+{
+    [Puzzle(2020, 16, "Ticket Translation")]
+    public class Day16 : Solution
+    {
+        private string inputString = string.Empty;
+
+        private List<(string name, int[] value)> criteria = new List<(string, int[])>();
+        private List<int[]> tickets; // where [0] is our ticket
+        private List<int[]> validTickets; // "
+
+        public Day16(string inputBox)
+        {
+            inputString = inputBox;
+            ParseInput();
+        }
+
+        public override async Task<string> GetPart1(CancellationToken cancellationToken)
+        {
+            // This is dubious as it's possible for gaps in the middle that would require more complex bounds
+            // However, inspecting the default input shows that the ranges overlap and merge into a single lower and upper bound
+            (int min, int max) bound = (
+                                       min: criteria.Aggregate((min, b) => b.value[0] < min.value[0] ? b : min).value[0],
+                                       max: criteria.Aggregate((max, b) => b.value[3] > max.value[3] ? b : max).value[3]
+                                       );
+
+            int sum = 0;
+            // We'll need the valid tickets for part 2
+            validTickets = tickets.Where(t =>
+                                    {
+                                        foreach (int n in t)
+                                        {
+                                            if (n < bound.min || n > bound.max)
+                                            {
+                                                sum += n;
+                                                return false;
+                                            }
+                                        }
+                                        return true;
+                                    })
+                                    .ToList();
+
+            return sum.ToString();
+        }
+
+        public override async Task<string> GetPart2(CancellationToken cancellationToken)
+        {
+            (string name, List<int> cols)[] valid_columns = new (string name, List<int>)[20];
+
+            // For each criteria create a list containing the column indices that are viable
+            valid_columns = criteria.Select(c =>
+                                        {
+                                            List<int> newlist = new List<int>();
+                                            for (int i = 0; i < tickets[0].Length; i++)
+                                            {
+                                                if (validTickets.Select(array => array[i])
+                                                           .All(val => isValidBounds(val, c.value)))
+                                                {
+                                                    newlist.Add(i);
+                                                }
+                                            }
+                                            return (c.name, newlist);
+                                        }).ToArray();
+
+            // Find a criteria with only one possible column and remove that as a possibility from the others
+            // If there isn't a unique solution then this doesn't work. Luckily our default input provides a unique solution
+            int while_break = 0;
+            while (!valid_columns.All(c => c.cols.Count.Equals(1)))
+            {
+                List<int> index_to_remove = valid_columns.Where(c => c.cols.Count.Equals(1))
+                                                         .Select(n => n.cols.First()).ToList();
+
+                valid_columns = valid_columns.Select(list => { 
+                                                            if (!list.cols.Count.Equals(1)) 
+                                                            { 
+                                                                foreach(int n in index_to_remove)
+                                                                {
+                                                                    list.cols.Remove(n);
+                                                                }
+                                                            } 
+                                                            return list; 
+                                                        }).ToArray();
+
+                while_break++;
+                if (while_break > 50) { break; }
+            }
+
+            // We now have a unique mapping from criteria to column and need only find the departure columns
+            long product = valid_columns.Where(n => n.name.Substring(0, 3)
+                                        .Equals("dep"))
+                                        .Select(v => v.cols.First())
+                                        .Aggregate(1L, (prod, x) => prod * validTickets[0][x]);
+
+            return product.ToString();
+        }
+
+        private bool isValidBounds(int num, int[] bounds)
+        {
+            return ((num >= bounds[0] && num <= bounds[1]) || (num >= bounds[2] && num <= bounds[3]));
+        }
+
+        private void ParseInput()
+        {
+            Regex reg_digit = new Regex(@"\d+");
+
+            List<List<string>> inputList = inputString.Replace("\r", "").Split("\n\n").Select(block => block.Split("\n").ToList()).ToList();
+
+            criteria = inputList[0].Select(line => (
+                                           name: line.Substring(0, line.IndexOf(':')),
+                                           value: reg_digit.Matches(line).Select(m => int.Parse(m.Value)).ToArray()
+                                           )
+                                   ).ToList();
+
+            tickets = inputList[2].Skip(1)
+                                  .Select(line => line.Split(',')
+                                                      .Select(n => int.Parse(n))
+                                                      .ToArray())
+                                  .ToList();
+
+            // add our ticket to the start
+            tickets.Insert(0, inputList[1].Last().Split(',').Select(n => int.Parse(n)).ToArray());
+        }
+    }
+}
