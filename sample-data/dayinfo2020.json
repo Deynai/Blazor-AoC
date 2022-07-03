@@ -1,0 +1,152 @@
+[
+  {
+    "Year": 2020,
+    "Day": 1,
+    "Title": "Report Repair",
+    "Summary": "Find pairs of two and three numbers from a given list that sum to 2020"
+  },
+  {
+    "Year": 2020,
+    "Day": 2,
+    "Title": "Password Philosophy",
+    "Summary": "Find how many passwords are valid according to certain rules on the characters"
+  },
+  {
+    "Year": 2020,
+    "Day": 3,
+    "Title": "Toboggan Trajectory",
+    "Summary": "Find the number of collisions with trees in a forest while moving in a straight line"
+  },
+  {
+    "Year": 2020,
+    "Day": 4,
+    "Title": "Passport Processing",
+    "Summary": "Find how many passports are valid according to certain field requirements"
+  },
+  {
+    "Year": 2020,
+    "Day": 5,
+    "Title": "Binary Boarding",
+    "Summary": "Sort through aeroplane boarding passes and find your seat number"
+  },
+  {
+    "Year": 2020,
+    "Day": 6,
+    "Title": "Custom Customs",
+    "Summary": "Find the union and intersection of sets of customs declaration forms"
+  },
+  {
+    "Year": 2020,
+    "Day": 7,
+    "Title": "Handy Haversacks",
+    "Summary": "Bags containing other bags. How many contain a shiny gold bag and what's inside?"
+  },
+  {
+    "Year": 2020,
+    "Day": 8,
+    "Title": "Handheld Halting",
+    "Summary": "Debugging faulty machine code instructions for a console boot program"
+  },
+  {
+    "Year": 2020,
+    "Day": 9,
+    "Title": "Encoding Error",
+    "Summary": "Finding contigious sums in an outdated \"XMAS\" cypher"
+  },
+  {
+    "Year": 2020,
+    "Day": 10,
+    "Title": "Adapter Array",
+    "Summary": "Connect a chain of power adaptors with increasing joltage ratings"
+  },
+  {
+    "Year": 2020,
+    "Day": 11,
+    "Title": "Seating System",
+    "Summary": "How many seats in the waiting room end up being occupied?"
+  },
+  {
+    "Year": 2020,
+    "Day": 12,
+    "Title": "Rain Risk",
+    "Summary": "What is the ships final position after following the navigation instructions?"
+  },
+  {
+    "Year": 2020,
+    "Day": 13,
+    "Title": "Shuttle Search",
+    "Summary": "Find the earliest departure patterns according to the bus schedule"
+  },
+  {
+    "Year": 2020,
+    "Day": 14,
+    "Title": "Docking Data",
+    "Summary": "Write values to memory addresses after applying a strange kind of bitmask"
+  },
+  {
+    "Year": 2020,
+    "Day": 15,
+    "Title": "Rambunctious Recitation",
+    "Summary": "What's the 30,000,000th number in this special \"Van Eck\" sequence?"
+  },
+  {
+    "Year": 2020,
+    "Day": 16,
+    "Title": "Ticket Translation",
+    "Summary": "Find out which train tickets are invalid and deduce which ticket fields are which"
+  },
+  {
+    "Year": 2020,
+    "Day": 17,
+    "Title": "Conway Cubes",
+    "Summary": "Conway's Game of Life in three and four dimensions"
+  },
+  {
+    "Year": 2020,
+    "Day": 18,
+    "Title": "Operation Order",
+    "Summary": "Parse arithmetic expressions with unconventional orders of operations"
+  },
+  {
+    "Year": 2020,
+    "Day": 19,
+    "Title": "Monster Messages",
+    "Summary": "Which messages are valid according to these nested grammar rules?"
+  },
+  {
+    "Year": 2020,
+    "Day": 20,
+    "Title": "Jurassic Jigsaw",
+    "Summary": "Construct the Jigsaw out of the pieces and find the sea monsters"
+  },
+  {
+    "Year": 2020,
+    "Day": 21,
+    "Title": "Allergen Assessment",
+    "Summary": "Deduce which ingredient contains each allergen"
+  },
+  {
+    "Year": 2020,
+    "Day": 22,
+    "Title": "Crab Combat",
+    "Summary": "You play a game of cards with recursive rules against a crab, who wins?"
+  },
+  {
+    "Year": 2020,
+    "Day": 23,
+    "Title": "Crab Cups",
+    "Summary": "The crab has his own game of permuting (a lot of) cups. What order are they in?"
+  },
+  {
+    "Year": 2020,
+    "Day": 24,
+    "Title": "Lobby Layout",
+    "Summary": "How many tiles are active in this cellular autonoma on a hexagonal grid?"
+  },
+  {
+    "Year": 2020,
+    "Day": 25,
+    "Title": "Combo Breaker",
+    "Summary": "Two public keys and a cryptographic handshake. Can it be cracked?"
+  }
+]
